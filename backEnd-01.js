@@ -105,7 +105,8 @@ let idCode = 122;
 const producto1 = new Product("Piense y hágase rico", "Excelente libro de Finanzas", "$4000", "thinkRich.jpg", idCode, 750);
 const producto2 = new Product("El Alquimista", "Excelente libro de Auto conocimiento", "$3000", "alquimista.jpg", idCode+=1, 550);
 const producto3 = new Product("El arte de la Guerra", "Tácticas Militares", "$4500", "warArt.jpg", idCode+=1, 400);
-// const producto4 = new Product("PruebaParaError","Este producto no contiene Stock, si lo descomentamos lanzaría ERROR", "$500", "error.jpg", idCode+=1);
+// const producto4 = new Product("PruebaParaError","Este producto no contiene Stock, si lo descomentamos y lo incorporamos al array con la funcion AddProduct lanzaría ERROR", "$500", "error.jpg", idCode+=1);
+const producto5 = new Product("El poder del pensamiento positivo", "Desarrollo personal", "$4300", "thinkPositive.png", idCode+=1, 150);
 
 const ProductHandler = new ProductManager;
 
@@ -123,3 +124,5 @@ ProductHandler.getProductById(producto1);
 ProductHandler.addProduct(producto1);
 ProductHandler.addProduct(producto3);
 ProductHandler.addProduct(producto2);
+ProductHandler.addProduct(producto5);
+ProductHandler.getProducts();
