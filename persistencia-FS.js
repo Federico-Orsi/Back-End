@@ -100,7 +100,13 @@ constructor(title, description, price,thumbnail,code, stock){
     this.stock=stock
 
 
+//    for (let key in Product) {
     
+//     if (Product[key] === undefined) {
+        
+//         throw new Error;
+//     }
+//    }
 
    if (title == undefined) {
 
@@ -146,7 +152,7 @@ const producto1 = new Product("Piense y hágase rico", "Excelente libro de Finan
 const producto2 = new Product("El Alquimista", "Excelente libro de Auto conocimiento", "$3000", "alquimista.jpg", idCode+=1, 550);
 const producto3 = new Product("El arte de la Guerra", "Tácticas Militares", "$4500", "warArt.jpg", idCode+=1, 400);
 // const producto4 = new Product("PruebaParaError","Este producto no contiene Stock, si lo descomentamos y lo incorporamos al array con la funcion AddProduct lanzaría ERROR", "$500", "error.jpg", idCode+=1);
-const producto5 = new Product("El poder del pensamiento positivo", "Desarrollo personal", "$4300", "thinkPositive.png", idCode+=1, 150);
+const producto5 = new Product("El poder del pensamiento positivo", "Desarrollo personal", "$4300", "thinkPositive.png", idCode+=1, 120 );
 const producto6 = new Product("El Hombre en busca de Sentido", "Gran libro de Viktor Frankl que nos invita a reflexionar y buscar el sentido de nuestras vidas.", "$3500", "ViktorFrankl.jpg", idCode+=1, 99);
 const producto7 = new Product("Tus zonas erróneas", "Autoayuda", "$3200", "WrongZones.jpg", idCode+=1, 102);
 
