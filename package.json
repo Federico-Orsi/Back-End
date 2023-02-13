@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "back-end-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/appServidor.js",
+  "scripts": {
+    "start": "node src/appServidor.js",
+    "test": "nodemon src/appServidor.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Federico-Orsi/Back-End.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Federico-Orsi/Back-End/issues"
+  },
+  "homepage": "https://github.com/Federico-Orsi/Back-End#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

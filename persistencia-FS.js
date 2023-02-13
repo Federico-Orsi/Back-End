@@ -1,12 +1,14 @@
+import fs from 'fs';
+
 console.log("Hola Mundo");
 // node persistencia-FS.js
 
-const fs = require('fs');
 
 
 
 
-class ProductManager{
+
+export class ProductManager{
 
 constructor(path){
 
@@ -30,7 +32,8 @@ constructor(path){
     
     getProducts = () => {
     
-     return console.log(this.Products);
+      console.log(this.Products);
+      return this.Products;
     } 
     
     getProductById = (item) => {
@@ -58,14 +61,19 @@ constructor(path){
     
   }
 
-  write = () => {
-  fs.promises.writeFile(this.path, JSON.stringify(this.Products));
+  write = async () => {
+  await fs.promises.writeFile(this.path, JSON.stringify(this.Products));
   }
 
   async read(){
+    try{
+
     const readFile = JSON.parse(await fs.promises.readFile(this.path, 'utf-8'));
     console.log("El Array que viene ahora aquí debajo es el que está leyendo con el ReadFile(Asincronicamente):");
     console.log(readFile);
+ } catch (error) {
+   console.log(error);
+ }   
 }
 
  deleteProduct(item){
@@ -77,10 +85,10 @@ constructor(path){
         console.log(this.Products);
     } else{console.log("UPPS!! El producto que intenta eliminar no se encuentra en el Array")}
     
-    
-    
   }
 
+
+  
 
 
 }
@@ -88,7 +96,7 @@ constructor(path){
 
 
 
-class Product{
+export class Product{
 
 
 constructor(title, description, price,thumbnail,code, stock){
@@ -179,8 +187,9 @@ ProductHandler.updateProduct(producto3, producto6);
 
 
 ProductHandler.write();
-ProductHandler.read();
+
 
 ProductHandler.deleteProduct(producto2);
 ProductHandler.deleteProduct(producto1);
 ProductHandler.deleteProduct(producto7);
+ProductHandler.read();
