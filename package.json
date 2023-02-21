@@ -3,10 +3,10 @@
   "name": "back-end-01",
   "version": "1.0.0",
   "description": "",
-  "main": "src/appServidor.js",
+  "main": "src/servidor1raEntrega.js",
   "scripts": {
-    "start": "node src/appServidor.js",
-    "test": "nodemon src/appServidor.js"
+    "start": "node src/servidor1raEntrega.js",
+    "test": "nodemon src/servidor1raEntrega.js"
   },
   "repository": {
     "type": "git",
