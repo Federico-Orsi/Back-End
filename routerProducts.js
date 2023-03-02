@@ -46,8 +46,20 @@ import { ManagerHandler } from "./clases1raEntrega.js";
         const nuevoProductoConID = {...newProduct, id: ID}
         ManagerHandler.addProduct(nuevoProductoConID);
 
+        req.io.on('connection', socket => {
+          
+          const arrayProd = ManagerHandler.getProducts();  
+          const found = arrayProd.find(prod => prod.id === nuevoProductoConID.id)
+          
+          
+          req.io.sockets.emit('socketPostProducto', found)
+          
+        })
         
+        
+
         res.status(202).json(`Su Producto: ${req.body.title}, fue agregado exitosamente.`);
+
       });
 
 

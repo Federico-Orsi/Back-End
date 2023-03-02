@@ -1,0 +1,15 @@
+
+<h1>{{title}}</h1>
+
+<div>Nombre Producto: {{productName}}</div>
+<br>
+
+{{#if arrayProd}}
+<h1>Productos Handlebars #forEach</h1>
+
+<ul>
+    {{#each arrayProd}}
+     <li>{{this.title}}: {{this.price}}</li>
+    {{/each}}
+</ul>
+{{/if}}
