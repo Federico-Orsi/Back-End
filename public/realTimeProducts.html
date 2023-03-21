@@ -17,10 +17,28 @@
     <br>
     <h3>Títulos de Productos agregados por POST:</h3>
     <ul id="socketPost"></ul>
+
+    <br>
+    <h2><strong>Chat conectado a Mongoose:</strong></h2>
     
+    <input id="userEmail" placeholder="User e-mail" type="text">
     
+    <br>
+    <br>
+    <textarea id="message" placeholder="Please wright a message" name="" id="" cols="30" rows="10"></textarea>
+    <br>
+    <button id="messageSend">Send</button>
+    <br>
+    <br>
+    <br>
+     <!-- <span>Usuario: </span><span id="pUsuario"></span> -->
+     <div id="pUsuario"></div>
+     <br>
+     <br>
+    <span>Mensaje: </span> <span id="pMessage"></span>
     
-  <script src="/socket.io/socket.io.js"></script>  
-  <script src="./realTimeProducts.js"></script>
+  <script src="/socket.io/socket.io.js" type="module"></script>  
+  <script src="./realTimeProducts.js" type="module"></script>
+  
 </body>
 </html>

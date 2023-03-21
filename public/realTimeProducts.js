@@ -1,11 +1,14 @@
+  
+  const socket = io()
 
-   const socket = io() 
+  
 
-   const socketP = document.getElementById("pTest");
+   const socketP = document.getElementById("pTest"); 
    const socketPp = document.getElementById("pTestt");
 
    const socketManager = document.getElementById("testManagerHandler");
    const socketPost = document.getElementById("socketPost");
+
    
    socket.on('1st Socket', test => 
         socketP.innerHTML = test 
@@ -33,4 +36,34 @@
    
 
 
+   const userEmail = document.getElementById("userEmail"); 
+   const pUsuario = document.getElementById("pUsuario");
+   const emailSend = document.getElementById("emailSend");
+   const pMessage = document.getElementById("pMessage");
 
+   const message = document.getElementById("message");
+  //  const messageValue = message.value 
+   const messageSend = document.getElementById("messageSend");
+   
+  
+  //  emailSend.onclick = async () =>{
+    
+   
+
+  //  socket.sockets.emit('MongooseUser', userEmail.value)    
+
+  //  }
+
+   messageSend.onclick = () =>{
+    
+    // pUsuario.innerHTML = userEmail.value ;
+    pUsuario.innerHTML +=`<p> Usuario: ${userEmail.value}</p>`
+    pMessage.innerHTML = message.value ;
+   
+    socket.emit('MongooseMessage', 
+   [userEmail.value,
+   message.value
+   ])   
+
+
+   }

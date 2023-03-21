@@ -1,7 +1,11 @@
 import { Router } from "express";
 import { randomUUID } from "crypto";
-import { Product } from "./clases1raEntrega.js";
-import { ManagerHandler } from "./clases1raEntrega.js";
+import { Product } from "../dao/managers/clases1raEntrega.js";
+import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
+
+import { Producto } from "../dao/models/plantillaProducto.js";
+import { productsCollection } from "../dao/managers/managerMongoose.js";
+import mongoose from 'mongoose';
 
       
       const routerProducts = Router();
@@ -60,6 +64,24 @@ import { ManagerHandler } from "./clases1raEntrega.js";
 
         res.status(202).json(`Su Producto: ${req.body.title}, fue agregado exitosamente.`);
 
+      });
+
+
+       routerProducts.post('/mongoose', async (req, res)  =>{
+        
+        const uri = "mongodb://localhost:27017/ecommerce"
+
+        await mongoose.connect(uri)
+        
+       
+        try{ 
+       const nuevoProducto = new Producto(req.body)
+       
+       await productsCollection.guardar(nuevoProducto)
+        
+
+        res.status(202).json(`Su Producto: ${req.body.title}, fue agregado exitosamente.`);
+       } catch(error){console.log(error)}
       });
 
 

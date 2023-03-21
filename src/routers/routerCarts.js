@@ -1,7 +1,10 @@
 import { Router } from "express";
 import { randomUUID } from "crypto";
-import { Carrito } from "./clases1raEntrega.js";
-import { ManagerHandler } from "./clases1raEntrega.js";
+import { Carrito } from "../dao/managers/clases1raEntrega.js";
+import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
+import { cartsCollection } from "../dao/managers/managerMongoose.js";
+import mongoose from 'mongoose';
+
 
       
       const routerCarts = Router();
@@ -61,6 +64,34 @@ import { ManagerHandler } from "./clases1raEntrega.js";
       });
 
     
+      routerCarts.post('/mongoose', async (req, res)  =>{
+        
+        const uri = "mongodb://localhost:27017/ecommerce"
+
+        await mongoose.connect(uri)
+        
+       
+        try{ 
+       const nuevoCart = {
+    
+        cart:[{Producto: req.body.Producto,
+        qty: req.body.qty}
+            
+    ]}
+
+
+
+
+       await cartsCollection.guardar(nuevoCart)
+        
+
+        res.status(202).json(`Su Producto ${req.body.Producto}, fue agregado al Carrito cuyo CID se guardó en la base de datos de Mongo DB.`);
+       } catch(error){console.log(error)}
+      });
+
+
+
+
       routerCarts.post('/:cid/products/:pid', (req, res) =>{
         
         const arrayProd = ManagerHandler.getProducts();    

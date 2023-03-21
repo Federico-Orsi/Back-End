@@ -3,10 +3,10 @@
   "name": "back-end-01",
   "version": "1.0.0",
   "description": "",
-  "main": "src/servidor1raEntrega.js",
+  "main": "src/main.js",
   "scripts": {
-    "start": "node src/servidor1raEntrega.js",
-    "test": "nodemon src/servidor1raEntrega.js"
+    "start": "node src/main.js",
+    "test": "nodemon src/main.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "express-handlebars": "^6.0.7",
+    "mongoose": "^7.0.2",
     "socket.io": "^4.6.1"
   }
 }

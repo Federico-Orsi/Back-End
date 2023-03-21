@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ManagerHandler } from "./clases1raEntrega.js";
+import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
 
 
 
