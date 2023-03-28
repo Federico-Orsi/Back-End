@@ -4,10 +4,13 @@ import { Carrito } from "../dao/managers/clases1raEntrega.js";
 import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
 import { cartsCollection } from "../dao/managers/managerMongoose.js";
 import mongoose from 'mongoose';
+import { productsCollection } from "../dao/managers/managerMongoose.js";
 
 
       
       const routerCarts = Router();
+
+      
 
       
       routerCarts.get('/', (req, res)  =>{
@@ -38,10 +41,15 @@ import mongoose from 'mongoose';
      });
    
 
-     routerCarts.put('/', (req, res)  =>{
+     routerCarts.put('/:cid', async (req, res)  =>{
       
-      ManagerHandler.write();
-      res.send("Se generaron efectivamente los archivos Productos.json y Carritos.json , los cuales respaldan en persistencia todas las operaciones realizadas previamente.")
+      const queryCid = req.query.cid
+
+      const cartById = await cartsCollection.findById("6422264d4c43580d4d4f2fdd") 
+      const prodDentroDelCart = await cartById.cart._id
+      
+      await cartsCollection.replaceOne({prodDentroDelCart}, { name: 'Jean Valjean' }) 
+      res.send("probando Update")
 
         } );
 
@@ -69,15 +77,16 @@ import mongoose from 'mongoose';
         const uri = "mongodb://localhost:27017/ecommerce"
 
         await mongoose.connect(uri)
+        const prodById = await productsCollection.findById(req.body.id)
+
         
        
         try{ 
        const nuevoCart = {
     
-        cart:[{Producto: req.body.Producto,
-        qty: req.body.qty}
-            
-    ]}
+      
+        cart:[prodById]
+      }
 
 
 
@@ -85,9 +94,23 @@ import mongoose from 'mongoose';
        await cartsCollection.guardar(nuevoCart)
         
 
-        res.status(202).json(`Su Producto ${req.body.Producto}, fue agregado al Carrito cuyo CID se guardó en la base de datos de Mongo DB.`);
+        res.status(202).json(`Su Producto ${prodById.title}, fue agregado al Carrito cuyo CID se guardó en la base de datos de Mongo DB.`);
        } catch(error){console.log(error)}
       });
+
+      
+      routerCarts.delete('/:cid/products/:pid', async (req, res) =>{
+        
+        
+        // const prodById = await productsCollection.findById(req.body.pid)
+        const cartById = await cartsCollection.findById("64221bdd6e9c88a567b55352") 
+        const test = cartById.cart[0]
+        
+        await cartsCollection.deleteOne({test})
+
+        res.json(`Su Producto: ${foundProd.title}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
+      });
+  
 
 
 

@@ -1,0 +1,24 @@
+
+<h1>{{title}}</h1>
+
+<div>ID Producto: {{productId}}</div>
+<br>
+
+{{#if Docs}}
+<h1>Productos Handlebars #forEach</h1>
+
+<ul>
+    {{#each Docs}}
+     
+     {{#each this}}
+     <li><strong>Id:</strong>{{this._id}}</li>
+     <li><strong>Title:</strong>{{this.title}}</li>
+     <li><strong>Description:</strong>{{this.description}}</li>
+     <li><strong>Category:</strong>{{this.category}}</li>
+     <li><strong>Stock:</strong>{{this.stock}}</li>
+     <li><strong>Prices:</strong> ${{this.price}}</li>
+    {{/each}}
+    {{/each}}
+     
+</ul>
+{{/if}}

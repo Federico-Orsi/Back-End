@@ -4,11 +4,11 @@
 <div>Nombre Producto: {{productName}}</div>
 <br>
 
-{{#if arrayProd}}
+{{#if Docs}}
 <h1>Productos Handlebars #forEach</h1>
 
 <ul>
-    {{#each arrayProd}}
+    {{#each Docs}}
      <li>{{this.title}}: ${{this.price}}</li>
     {{/each}}
 </ul>
