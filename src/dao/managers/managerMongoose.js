@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2'
+import { Schema } from 'mongoose';
 
 
 export class ManagerMongoose {
@@ -16,6 +17,11 @@ async guardar (nuevoProducto) {
 async findById (productId){
  return await this.collection.findById(productId)   
 }
+
+async findOne(campo){
+    return await this.collection.findOne(campo)
+   }
+   
 
 async find (){
     return await this.collection.find()
@@ -58,7 +64,28 @@ export const messagesCollection = new ManagerMongoose("messages", ({
 
 
 export const cartsCollection = new ManagerMongoose("carts", ({
-    cart: {type:Object, required: true}
+    cart: {type:Object, required: true},
+    // products: {
+    //     type: [
+    //         {
+    //             product:{
+    //                 type: Schema.Types.ObjectId ,
+    //                 ref: "products"
+    //             }
+    //         }
+    //     ]
+    // }
     
+    
+}))
+
+
+export const userCollection = new ManagerMongoose("user", ({
+    Nombre: {type: String, required: true}, 
+    Apellido: {type: String, required:true},
+    e_mail: {type: String, required: true},
+    Edad: {type: Number},
+    password: {type: String, required: true},
+    rol: {type: String, required: true}
     
 }))

@@ -2,6 +2,8 @@ import express from 'express';
 import routerProducts from './routers/routerProducts.js';
 import routerCarts from './routers/routerCarts.js';
 import webRouter from './routers/webRouter.js';
+import routerUsers from './routers/routerUsers.js';
+import routerSessions from './routers/routerSessions.js';
 import {engine} from 'express-handlebars';
 import {Server} from 'socket.io';
 import { ManagerHandler} from './dao/managers/clases1raEntrega.js'
@@ -9,6 +11,7 @@ import mongoose from 'mongoose';
 import { pasarProd } from './dao/managers/managerProductos.js';
 import { pasarMessages } from './dao/managers/managerMessages.js';
 import { pasarCart } from './dao/managers/managerCarts.js';
+import session from "express-session"
 
 
  
@@ -27,6 +30,13 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
 
+app.use(session({
+    
+    secret: 'secretCode',
+    resave: false,
+    saveUninitialized: false
+}))
+
 export const io = new Server(conexionPuerto);
 
 function postSocket (req, res, next) {
@@ -39,6 +49,8 @@ app.use(postSocket)
 
 app.use('/api/products', routerProducts);
 app.use('/api/carts', routerCarts);
+app.use('/api/users', routerUsers);
+app.use('/api/sessions', routerSessions);
 app.use('/handlebars', webRouter);
 
 
