@@ -4,5 +4,8 @@
     <input id="password" type="password" placeholder="Password"><br />
     <input type="submit">
 </form>
+{{#if logFail}}
+<p id="logFail">{{logFail}}</p>
+{{/if}}
 <p>¿No estás registrado todavía? <a href="/handlebars/registro">Regístrate aquí</a></p>
 <script src="/js/login.js" type="module"></script>

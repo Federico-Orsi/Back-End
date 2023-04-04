@@ -74,9 +74,7 @@ import { productsCollection } from "../dao/managers/managerMongoose.js";
     
       routerCarts.post('/mongoose', async (req, res)  =>{
         
-        const uri = "mongodb://localhost:27017/ecommerce"
-
-        await mongoose.connect(uri)
+        
         const prodById = await productsCollection.findById(req.body.id)
 
         
@@ -108,7 +106,7 @@ import { productsCollection } from "../dao/managers/managerMongoose.js";
         
         await cartsCollection.deleteOne({test})
 
-        res.json(`Su Producto: ${foundProd.title}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
+        res.json(`Su Producto: ${""}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
       });
   
 

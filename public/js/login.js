@@ -1,7 +1,13 @@
 const loginForm = document.getElementById('loginForm')
 const e_mail = document.getElementById('email')
 const password = document.getElementById('password')
+const logFail = document.getElementById('logFail')
 
+
+
+if(logFail) {
+    logFail.style.color = "red";
+} 
 
 if (loginForm instanceof HTMLFormElement) {
     loginForm.addEventListener('submit', e => {

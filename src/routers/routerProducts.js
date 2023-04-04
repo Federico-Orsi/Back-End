@@ -68,10 +68,6 @@ routerProducts.get('/mongoose', async (req, res) => {
 
 routerProducts.post('/mongoose', async (req, res) => {
 
-  const uri = "mongodb://localhost:27017/ecommerce"
-
-  await mongoose.connect(uri)
-
 
   try {
     const nuevoProducto = new Producto(req.body)
@@ -82,7 +78,7 @@ routerProducts.post('/mongoose', async (req, res) => {
 
 
 
-    // res.status(202).json(`Su Producto: ${req.body.title}, fue agregado exitosamente.`)
+   
     res.status(202).json(prodEncontrado)
   } catch (error) { console.log(error) }
 });
