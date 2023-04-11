@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userCollection } from "../dao/managers/managerMongoose.js";
+import { hashear } from "../utils/crypto.js";
 
 
 
@@ -12,8 +13,9 @@ routerUsers.post('/', async (req, res) => {
    
     
       
-    const {Nombre, Apellido, Edad, password, rol } = req.body
+    const {Nombre, Apellido, Edad, rol } = req.body
     const e_mail = req.body.e_mail
+    const password = hashear(req.body.password)
     console.log(e_mail)
     const exist = await userCollection.findOne({e_mail})
     if (exist) return res.status(422).json({ status: "error", error: "User already exists" })

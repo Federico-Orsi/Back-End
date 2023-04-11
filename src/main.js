@@ -11,7 +11,8 @@ import mongoose from 'mongoose';
 import { pasarProd } from './dao/managers/managerProductos.js';
 import { pasarMessages } from './dao/managers/managerMessages.js';
 import { pasarCart } from './dao/managers/managerCarts.js';
-import session from "express-session"
+import session from "express-session";
+import passport from 'passport';
 
 
  
@@ -36,6 +37,9 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }))
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 export const io = new Server(conexionPuerto);
 
