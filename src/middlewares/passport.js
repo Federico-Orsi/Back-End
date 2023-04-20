@@ -4,13 +4,13 @@ import { userCollection } from '../dao/managers/managerMongoose.js'
 import { validarQueSeanIguales } from '../utils/crypto.js'
 
 
-passport.use('local', new Strategy({usernameField: "e_mail"}, async (username, password, done) => {
+passport.use('local', new Strategy(async (username, password, done) => {
     try{
     const buscado = await userCollection.findOne({username})
     if (!buscado)
         return done(new Error('Error de autenticación'))
     if (!validarQueSeanIguales(password, buscado.password))
-        return done(new Error('Error de autenticación'))
+        return done(new Error('Error de autenticacion'))
     delete buscado.password
     done(null, buscado)
     } catch (error){

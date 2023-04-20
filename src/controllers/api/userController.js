@@ -9,21 +9,21 @@ export async function userController (req, res, next) {
     
       
     const {Nombre, Apellido, Edad, rol } = req.body
-    const e_mail = req.body.e_mail
+    const username = req.body.username
     const password = hashear(req.body.password)
-    console.log(e_mail)
-    const exist = await userCollection.findOne({e_mail})
+    console.log(username)
+    const exist = await userCollection.findOne({username})
     if (exist) return res.status(422).json({ status: "error", error: "User already exists" })
     const user = {
         Nombre,
         Apellido,
-        e_mail,
+        username,
         Edad,
         password,
         rol
     }
     await userCollection.guardar(user)
-    res.json({ status: "success", message: "User registered" })
-
+    // res.json({ status: "success", message: "User registered" })
+    res.json(req.user)
     
   }

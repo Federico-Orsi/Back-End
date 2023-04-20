@@ -15,7 +15,7 @@ if (registerForm instanceof HTMLFormElement) {
         const user = {
             Nombre : Nombre.value,
             Apellido : Apellido.value,
-            e_mail: e_mail.value,
+            username: e_mail.value,
             Edad: Edad.value,
             rol: rol.value,
             password: password.value

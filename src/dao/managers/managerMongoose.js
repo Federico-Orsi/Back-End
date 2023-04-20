@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
-import mongoosePaginate from 'mongoose-paginate-v2'
-import { Schema } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 
 export class ManagerMongoose {
@@ -83,7 +82,7 @@ export const cartsCollection = new ManagerMongoose("carts", ({
 export const userCollection = new ManagerMongoose("user", ({
     Nombre: {type: String, required: true}, 
     Apellido: {type: String, required:true},
-    e_mail: {type: String, required: true},
+    username: {type: String, required: true},
     Edad: {type: Number},
     password: {type: String, required: true},
     rol: {type: String, required: true}

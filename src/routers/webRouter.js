@@ -45,7 +45,7 @@ webRouter.get('/mongoose', async (req, res) => {
    console.log(Docs)
 
    res.render('mongoose', {titulo: "Mongoose",title:"Mongoose Products", productId: paginadoMasCampos.docs[1]?._id,
-              Docs, SessionName: req.session.user?.name, SessionEmail: req.session.user?.email, SessionRol: req.session.user?.rol});
+              Docs, SessionName: req.user?.Nombre, SessionLastName: req.user?.Apellido, SessionEmail: req.user?.username, SessionRol: req.user?.rol});
 
 });
 

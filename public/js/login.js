@@ -13,7 +13,7 @@ if (loginForm instanceof HTMLFormElement) {
     loginForm.addEventListener('submit', e => {
         e.preventDefault()
         const obj = {
-            e_mail: e_mail.value,
+            username: e_mail.value,
             password: password.value
         };
         fetch('/api/sessions/', {

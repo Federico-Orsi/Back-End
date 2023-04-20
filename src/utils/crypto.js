@@ -5,5 +5,6 @@ export function hashear(password) {
 }
 
 export function validarQueSeanIguales(recibida, almacenada) {
+   
     return bcrypt.compareSync(recibida, almacenada)
 }
