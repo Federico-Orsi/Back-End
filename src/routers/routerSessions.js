@@ -35,10 +35,14 @@ const routerSessions = Router();
         next(error)
     } 
 
-
-    
-
   });
   
+ 
+  routerSessions.get('/current',  (req, res, next) => {
+
+    res.json(req.user)
+
+  });
+
   
   export default routerSessions
