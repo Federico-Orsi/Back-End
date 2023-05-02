@@ -3,6 +3,7 @@ import { engine } from 'express-handlebars';
 import session from "express-session";
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
+import { PORT, SessionSecretWord, uri } from '../config.js';
 import { ManagerHandler } from './dao/managers/clases1raEntrega.js';
 import { pasarCart } from './dao/managers/managerCarts.js';
 import { pasarMessages } from './dao/managers/managerMessages.js';
@@ -17,14 +18,12 @@ import webRouter from './routers/webRouter.js';
 
  
 
-export const uriAtlas = "mongodb+srv://FedericoAntonioOrsi:eldiego10@cluster-fao.bbm9xm5.mongodb.net/ecommerce"
-const uri = "mongodb://localhost:27017/ecommerce"
 
 await mongoose.connect(uri)
 
 const app = express();
-const conexionPuerto = app.listen(8080, () => {
-    console.log("Eschuchando en Puerto 8080")
+const conexionPuerto = app.listen(PORT, () => {
+    console.log(`Eschuchando en Puerto ${PORT}`)
 })
 
 app.use(express.json());
@@ -33,7 +32,7 @@ app.use(express.static('public'));
 
 app.use(session({
     
-    secret: 'secretCode',
+    secret: SessionSecretWord,
     resave: false,
     saveUninitialized: false
 }))
