@@ -38,6 +38,11 @@ async find (){
     return await this.collection.deleteOne({item})
    }
 
+   async findByIdAndUpdate (id, datosActualizados){
+
+    return await this.collection.findByIdAndUpdate(id, datosActualizados, {new: true}).lean()
+   }
+
 
 
 }
@@ -49,7 +54,7 @@ export const productsCollection = new ManagerMongoose("products", ({
     code: {type: Number, required: true}, 
     price: {type: Number, required: true}, 
     status: {type: String, required: true}, 
-    stock: {type: String, required: true}, 
+    stock: {type: Number, required: true}, 
     category: {type: String, required: true}, 
     thumbnails: {type: String, required: true}
 }))

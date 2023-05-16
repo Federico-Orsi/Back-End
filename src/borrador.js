@@ -31,3 +31,51 @@
 //     price: 300
 // });
 // mongoose.connection.close();
+
+
+// {
+//     "title": "Leo King4", 
+//     "description": "La 3ra",      
+//      "code": 123, 
+//      "price": 10000, 
+//       "status": "rogerThat", 
+//       "stock": 500,      
+//       "category": "action", 
+//       "thumbnails": "rocko.jpg"  
+//   }
+
+
+// routerProducts.put('/:pid', (req, res) =>{
+//   const datosBody = req.body ;
+//   const infoToUpdateProduct = new Product(datosBody);
+
+//   const arrayProd = ManagerHandler.getProducts();    
+//   const found = arrayProd.find(prod => prod.id == req.params.pid)
+//   const newProductConID = {...infoToUpdateProduct, id: found.id}
+
+//       if(found){
+
+//            const foundIndex = arrayProd.indexOf(found)
+//            arrayProd.splice(foundIndex,1, newProductConID);
+
+//           res.json(newProductConID);
+//       } else{res.json({"Error":'El producto que intenta actualizar no se encuentra en el Array'})}
+
+// });
+
+
+// routerCarts.get('/:cid', (req, res) =>{
+
+//     const arrayCart = ManagerHandler.getCarts();
+//     const found = arrayCart.find(cart => cart.cid == req.params.cid)
+    
+//     if (found){
+//        res.json(found) 
+ 
+//     } else { 
+//     res.send({"Error":'Cart Not Found'})
+    
+//    }  
+  
+
+//  });

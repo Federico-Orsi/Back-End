@@ -1,11 +1,8 @@
 import { Router } from "express";
-import { randomUUID } from "crypto";
-import { Product } from "../dao/managers/clases1raEntrega.js";
 import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
-import { io } from "../main.js";
-import { Producto } from "../dao/models/plantillaProducto.js";
 import { productsCollection } from "../dao/managers/managerMongoose.js";
-import mongoose from 'mongoose';
+import { Producto } from "../dao/models/plantillaProducto.js";
+import { io } from "../main.js";
 
 
 const routerProducts = Router();
@@ -42,11 +39,8 @@ routerProducts.get('/', (req, res) => {
 
 routerProducts.get('/mongoose', async (req, res) => {
 
-
-  const coleccion = await productsCollection.findById("6416309ca32466a9de598f6a")   
-  console.log(coleccion)
   
-  const opcionesPaginado = { limit: req.body.limit, page: req.body.page }
+  const opcionesPaginado = { limit: req.body.limit, page: req.body.page, lean: true }
   const criterioBusqueda = { category: req.body.category }
   const paginado = await productsCollection.paginate(criterioBusqueda, opcionesPaginado)
   const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }
@@ -72,35 +66,17 @@ routerProducts.post('/mongoose', async (req, res) => {
   try {
     const nuevoProducto = new Producto(req.body)
 
-    await productsCollection.guardar(nuevoProducto)
+    const nuevoProdMongo = await productsCollection.guardar(nuevoProducto)
 
-    const prodEncontrado = await productsCollection.findById(req.body.id)
+    const prodMongoID = await productsCollection.findById(nuevoProdMongo._id)
 
-
-
-   
-    res.status(202).json(prodEncontrado)
+    
+    res.status(202).json(prodMongoID)
   } catch (error) { console.log(error) }
 });
 
 
-// routerProducts.put('/:pid', (req, res) =>{
-//   const datosBody = req.body ;
-//   const infoToUpdateProduct = new Product(datosBody);
 
-//   const arrayProd = ManagerHandler.getProducts();    
-//   const found = arrayProd.find(prod => prod.id == req.params.pid)
-//   const newProductConID = {...infoToUpdateProduct, id: found.id}
-
-//       if(found){
-
-//            const foundIndex = arrayProd.indexOf(found)
-//            arrayProd.splice(foundIndex,1, newProductConID);
-
-//           res.json(newProductConID);
-//       } else{res.json({"Error":'El producto que intenta actualizar no se encuentra en el Array'})}
-
-// });
 
 routerProducts.put('/mongoose', async (req, res) => {
 

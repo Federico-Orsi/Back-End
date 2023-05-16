@@ -5,9 +5,7 @@ import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import { PORT, SessionSecretWord, uri } from '../config.js';
 import { ManagerHandler } from './dao/managers/clases1raEntrega.js';
-import { pasarCart } from './dao/managers/managerCarts.js';
 import { pasarMessages } from './dao/managers/managerMessages.js';
-import { pasarProd } from './dao/managers/managerProductos.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
 import routerCarts from './routers/routerCarts.js';
 import routerProducts from './routers/routerProducts.js';
@@ -83,9 +81,9 @@ io.on('connection', socket => {
 
 
 
-await pasarProd()
+
 await pasarMessages()
-await pasarCart()
+
 
 
 

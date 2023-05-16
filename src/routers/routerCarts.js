@@ -1,10 +1,7 @@
-import { Router } from "express";
 import { randomUUID } from "crypto";
-import { Carrito } from "../dao/managers/clases1raEntrega.js";
+import { Router } from "express";
 import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
-import { cartsCollection } from "../dao/managers/managerMongoose.js";
-import mongoose from 'mongoose';
-import { productsCollection } from "../dao/managers/managerMongoose.js";
+import { cartsCollection, productsCollection } from "../dao/managers/managerMongoose.js";
 
 
       
@@ -24,19 +21,25 @@ import { productsCollection } from "../dao/managers/managerMongoose.js";
       } );
      
 
-        routerCarts.get('/:cid', (req, res) =>{
-
-        const arrayCart = ManagerHandler.getCarts();
-        const found = arrayCart.find(cart => cart.cid == req.params.cid)
+        routerCarts.get('/:cid/purchase', async (req, res) =>{
         
-        if (found){
-           res.json(found) 
-     
-        } else { 
-        res.send({"Error":'Cart Not Found'})
+        try{
+          const cartById = await cartsCollection.findById(req.params.cid) 
+          const arrayCarrito = cartById.cart
+          const reqBody = req.body.id
+          const found = arrayCarrito.find(elem => elem._id == reqBody )
+          const foundIndex = arrayCarrito.indexOf(found)
+          const stockRestante = arrayCarrito[foundIndex]?.stock-req.body.qty
         
-       }  
-      
+          if (cartById){
+             console.log(cartById.cart[foundIndex]?.stock-req.body.qty)
+             await productsCollection.findByIdAndUpdate(reqBody, {stock: stockRestante } ) 
+             res.json(cartById) 
+          } 
+        } catch(error){
+          res.send({error:'Cart Not Found'})
+        }
+        
 
      });
    
@@ -76,23 +79,23 @@ import { productsCollection } from "../dao/managers/managerMongoose.js";
         
         
         const prodById = await productsCollection.findById(req.body.id)
-
-        
+        const prodConQty = {...prodById, qty: req.body.qty}
+        console.log(prodConQty)
        
         try{ 
        const nuevoCart = {
     
       
-        cart:[prodById]
+        cart:[prodConQty]
       }
 
 
 
 
-       await cartsCollection.guardar(nuevoCart)
+       const nuevoCartGuardado = await cartsCollection.guardar(nuevoCart)
         
 
-        res.status(202).json(`Su Producto ${prodById.title}, fue agregado al Carrito cuyo CID se guardó en la base de datos de Mongo DB.`);
+        res.status(202).json(`Su Producto ${prodById?.title}, fue agregado exitosamente al Carrito cuyo CID es: ${nuevoCartGuardado._id}.`);
        } catch(error){console.log(error)}
       });
 
