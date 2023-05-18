@@ -1,7 +1,7 @@
 
 
 
-export async function sessionController (req, res) {
+export async function sessionRaiz (req, res) {
 
    
     // const { e_mail, password} = req.body

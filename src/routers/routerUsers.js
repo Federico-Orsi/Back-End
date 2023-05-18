@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userController } from "../controllers/api/userController.js";
+import { userController } from "../controllers/userControllers/userController.js";
 
 
 
