@@ -79,3 +79,28 @@
   
 
 //  });
+
+
+// routerCarts.post('/:cid/products/:pid', (req, res) =>{
+        
+//     const arrayProd = ManagerHandler.getProducts();    
+//     const foundProd = arrayProd.find(prod => prod.id == req.params.pid)
+    
+//     const arrayCart = ManagerHandler.getCarts();
+//     const foundCart = arrayCart.find(cart => cart.cid == req.params.cid)
+    
+//     let qty = 1 ;
+//     const productsCarrito = foundCart.products;
+//     const objetoAPushearalCartEspecifico = {ProductID: req.params.pid, qty:qty}
+    
+//     if(foundProd && foundCart){
+        
+//      const foundEnArrayInterno = productsCarrito.find(prod => prod.ProductID == req.params.pid)
+      
+//      foundEnArrayInterno? foundEnArrayInterno.qty+=1 : productsCarrito.push(objetoAPushearalCartEspecifico);
+     
+//     }
+
+//     res.json(`Su Producto: ${foundProd.title}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
+//   });
+

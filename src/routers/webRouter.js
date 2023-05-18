@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
-import { productsCollection } from "../dao/managers/managerMongoose.js";
+import { ManagerHandler } from "../borrador/clases1raEntrega.js";
+import { productsRepository } from "../repository/productsRepository.js";
 
 
 
@@ -19,7 +19,7 @@ webRouter.get('/prueba', async (req, res) => {
 
    const opcionesPaginado = { limit: req.query.limit, page: req.query.page }
    const criterioBusqueda = { category: req.query.category }
-   const paginado = await productsCollection.paginate(criterioBusqueda, opcionesPaginado)
+   const paginado = await productsRepository.paginate(criterioBusqueda, opcionesPaginado)
    const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }
    const Docs = paginadoMasCampos.docs
 
@@ -36,7 +36,7 @@ webRouter.get('/mongoose', async (req, res) => {
 
    const opcionesPaginado = { limit: req.query.limit, page: req.query.page }
    const criterioBusqueda = { category: req.query.category }
-   const paginado = await productsCollection.paginate(criterioBusqueda, opcionesPaginado)
+   const paginado = await productsRepository.paginate(criterioBusqueda, opcionesPaginado)
    const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }
    const Docs = paginadoMasCampos.docs
 

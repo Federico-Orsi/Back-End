@@ -1,6 +1,6 @@
-import { messagesCollection } from "./managerMongoose.js";
-import { io } from "../../main.js";
 import mongoose from "mongoose";
+import { io } from "../../main.js";
+import { messagesRepository } from "../../repository/messagesRepository.js";
 import { Message } from "../models/plantillaMessage.js";
 
 
@@ -15,7 +15,7 @@ export const pasarMessages = async () => {
         
         socket.on('MongooseMessage', data => {
             
-            messagesCollection.guardar(new Message(
+            messagesRepository.guardar(new Message(
     
                data[0],
                data[1]

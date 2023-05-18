@@ -1,12 +1,12 @@
 import passport from 'passport'
 import { Strategy } from 'passport-local'
-import { userCollection } from '../dao/managers/managerMongoose.js'
+import { usersRepository } from '../repository/usersRepository.js'
 import { validarQueSeanIguales } from '../utils/crypto.js'
 
 
 passport.use('local', new Strategy(async (username, password, done) => {
     try{
-    const buscado = await userCollection.findOne({username})
+    const buscado = await usersRepository.findOne({username})
     if (!buscado)
         return done(new Error('Error de autenticación'))
     if (!validarQueSeanIguales(password, buscado.password))

@@ -1,6 +1,6 @@
-import { userCollection } from "../../dao/managers/managerMongoose.js";
+import { cartsRepository } from "../../repository/cartsRepository.js";
+import { usersRepository } from "../../repository/usersRepository.js";
 import { hashear } from "../../utils/crypto.js";
-
 
 
 export async function userController (req, res, next) {
@@ -12,17 +12,26 @@ export async function userController (req, res, next) {
     const username = req.body.username
     const password = hashear(req.body.password)
     console.log(username)
-    const exist = await userCollection.findOne({username})
+    const exist = await usersRepository.findOne({username})
     if (exist) return res.status(422).json({ status: "error", error: "User already exists" })
+    const nuevoCart = {
+    
+      
+        cart:"",
+        user: username
+      }
+
+    const idCart = await cartsRepository.guardar(nuevoCart)
     const user = {
         Nombre,
         Apellido,
         username,
         Edad,
         password,
+        cart: idCart,
         rol
     }
-    await userCollection.guardar(user)
+    await usersRepository.guardar(user)
     // res.json({ status: "success", message: "User registered" })
     res.json(req.user)
     

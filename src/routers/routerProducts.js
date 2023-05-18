@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
-import { productsCollection } from "../dao/managers/managerMongoose.js";
+import { ManagerHandler } from "../borrador/clases1raEntrega.js";
 import { Producto } from "../dao/models/plantillaProducto.js";
 import { io } from "../main.js";
+import { productsRepository } from "../repository/productsRepository.js";
 
 
 const routerProducts = Router();
@@ -42,7 +42,7 @@ routerProducts.get('/mongoose', async (req, res) => {
   
   const opcionesPaginado = { limit: req.body.limit, page: req.body.page, lean: true }
   const criterioBusqueda = { category: req.body.category }
-  const paginado = await productsCollection.paginate(criterioBusqueda, opcionesPaginado)
+  const paginado = await productsRepository.paginate(criterioBusqueda, opcionesPaginado)
   const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }
 
   io.on('connection', socket => {
@@ -66,9 +66,9 @@ routerProducts.post('/mongoose', async (req, res) => {
   try {
     const nuevoProducto = new Producto(req.body)
 
-    const nuevoProdMongo = await productsCollection.guardar(nuevoProducto)
+    const nuevoProdMongo = await productsRepository.guardar(nuevoProducto)
 
-    const prodMongoID = await productsCollection.findById(nuevoProdMongo._id)
+    const prodMongoID = await productsRepository.findById(nuevoProdMongo._id)
 
     
     res.status(202).json(prodMongoID)
@@ -81,7 +81,7 @@ routerProducts.post('/mongoose', async (req, res) => {
 routerProducts.put('/mongoose', async (req, res) => {
 
 
-  const prodEncontrado = await productsCollection.findById(req.body.id)
+  const prodEncontrado = await productsRepository.findById(req.body.id)
 
   prodEncontrado.description = req.body.description;
   prodEncontrado.status = req.body.status;

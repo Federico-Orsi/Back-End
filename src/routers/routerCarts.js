@@ -1,8 +1,8 @@
 import { randomUUID } from "crypto";
 import { Router } from "express";
-import { ManagerHandler } from "../dao/managers/clases1raEntrega.js";
-import { cartsCollection, productsCollection } from "../dao/managers/managerMongoose.js";
-
+import { ManagerHandler } from "../borrador/clases1raEntrega.js";
+import { cartsRepository } from "../repository/cartsRepository.js";
+import { productsRepository } from "../repository/productsRepository.js";
 
       
       const routerCarts = Router();
@@ -24,7 +24,7 @@ import { cartsCollection, productsCollection } from "../dao/managers/managerMong
         routerCarts.get('/:cid/purchase', async (req, res) =>{
         
         try{
-          const cartById = await cartsCollection.findById(req.params.cid) 
+          const cartById = await cartsRepository.findById(req.params.cid) 
           const arrayCarrito = cartById.cart
           const reqBody = req.body.id
           const found = arrayCarrito.find(elem => elem._id == reqBody )
@@ -33,7 +33,7 @@ import { cartsCollection, productsCollection } from "../dao/managers/managerMong
         
           if (cartById){
              console.log(cartById.cart[foundIndex]?.stock-req.body.qty)
-             await productsCollection.findByIdAndUpdate(reqBody, {stock: stockRestante } ) 
+             await productsRepository.findByIdAndUpdate(reqBody, {stock: stockRestante } ) 
              res.json(cartById) 
           } 
         } catch(error){
@@ -48,10 +48,10 @@ import { cartsCollection, productsCollection } from "../dao/managers/managerMong
       
       const queryCid = req.query.cid
 
-      const cartById = await cartsCollection.findById("6422264d4c43580d4d4f2fdd") 
+      const cartById = await cartsRepository.findById("6422264d4c43580d4d4f2fdd") 
       const prodDentroDelCart = await cartById.cart._id
       
-      await cartsCollection.replaceOne({prodDentroDelCart}, { name: 'Jean Valjean' }) 
+      await cartsRepository.replaceOne({prodDentroDelCart}, { name: 'Jean Valjean' }) 
       res.send("probando Update")
 
         } );
@@ -78,24 +78,23 @@ import { cartsCollection, productsCollection } from "../dao/managers/managerMong
       routerCarts.post('/mongoose', async (req, res)  =>{
         
         
-        const prodById = await productsCollection.findById(req.body.id)
-        const prodConQty = {...prodById, qty: req.body.qty}
+        // const prodById = await productsCollection.findById(req.body.id)
+        
+        // const prodConQty = {...prodById, qty: req.body.qty} 
+        const reqQty = req.body.qty
+        const prodConQty = await productsRepository.findOneAndUpdate({_id: req.body.id}, {qty: reqQty}) 
         console.log(prodConQty)
        
         try{ 
-       const nuevoCart = {
-    
-      
-        cart:[prodConQty]
-      }
+       
 
 
 
 
-       const nuevoCartGuardado = await cartsCollection.guardar(nuevoCart)
+       const nuevoCartGuardado = await cartsRepository.guardar(nuevoCart)
         
 
-        res.status(202).json(`Su Producto ${prodById?.title}, fue agregado exitosamente al Carrito cuyo CID es: ${nuevoCartGuardado._id}.`);
+        res.status(202).json(`Su Producto ${prodConQty?.title}, fue agregado exitosamente al Carrito cuyo CID es: ${nuevoCartGuardado._id}.`);
        } catch(error){console.log(error)}
       });
 
@@ -104,10 +103,10 @@ import { cartsCollection, productsCollection } from "../dao/managers/managerMong
         
         
         // const prodById = await productsCollection.findById(req.body.pid)
-        const cartById = await cartsCollection.findById("64221bdd6e9c88a567b55352") 
+        const cartById = await cartsRepository.findById("64221bdd6e9c88a567b55352") 
         const test = cartById.cart[0]
         
-        await cartsCollection.deleteOne({test})
+        await cartsRepository.deleteOne({test})
 
         res.json(`Su Producto: ${""}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
       });
@@ -116,27 +115,28 @@ import { cartsCollection, productsCollection } from "../dao/managers/managerMong
 
 
 
-      routerCarts.post('/:cid/products/:pid', (req, res) =>{
+      routerCarts.post('/:cid/products/:pid', async (req, res) =>{
         
-        const arrayProd = ManagerHandler.getProducts();    
-        const foundProd = arrayProd.find(prod => prod.id == req.params.pid)
+        const prodById = await productsRepository.findById(req.params.pid)  
         
-        const arrayCart = ManagerHandler.getCarts();
-        const foundCart = arrayCart.find(cart => cart.cid == req.params.cid)
+        const cartById = await cartsRepository.findById(req.params.cid) 
+        const arrayCarrito = cartById.cart
+        console.log(arrayCarrito)
         
         let qty = 1 ;
-        const productsCarrito = foundCart.products;
-        const objetoAPushearalCartEspecifico = {ProductID: req.params.pid, qty:qty}
+       
+        const objetoAPushearalCartEspecifico = {Product: prodById, qty:qty}
         
-        if(foundProd && foundCart){
+        if(prodById && cartById){
             
-         const foundEnArrayInterno = productsCarrito.find(prod => prod.ProductID == req.params.pid)
+         const foundEnArrayInterno = arrayCarrito.find(prod => prod._id == req.params.pid)
           
-         foundEnArrayInterno? foundEnArrayInterno.qty+=1 : productsCarrito.push(objetoAPushearalCartEspecifico);
+         foundEnArrayInterno? foundEnArrayInterno.qty+=1 : arrayCarrito.push(objetoAPushearalCartEspecifico);
          
         }
-
-        res.json(`Su Producto: ${foundProd.title}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
+        console.log(arrayCarrito)
+        
+        res.json(`Su Producto: ${prodById.title}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
       });
   
 

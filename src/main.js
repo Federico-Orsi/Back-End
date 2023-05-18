@@ -4,7 +4,7 @@ import session from "express-session";
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import { PORT, SessionSecretWord, uri } from '../config.js';
-import { ManagerHandler } from './dao/managers/clases1raEntrega.js';
+import { ManagerHandler } from './borrador/clases1raEntrega.js';
 import { pasarMessages } from './dao/managers/managerMessages.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
 import routerCarts from './routers/routerCarts.js';
