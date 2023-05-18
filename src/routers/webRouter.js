@@ -1,72 +1,26 @@
 import { Router } from "express";
-import { ManagerHandler } from "../borrador/clases1raEntrega.js";
-import { productsRepository } from "../repository/productsRepository.js";
-
+import { getLogin } from "../controllers/webControllers/getLogin.js";
+import { getMongoose } from "../controllers/webControllers/getMongoose.js";
+import { getPrueba } from "../controllers/webControllers/getPrueba.js";
+import { getRaiz } from "../controllers/webControllers/getRaiz.js";
+import { getRegistro } from "../controllers/webControllers/getRegistro.js";
 
 
 const webRouter = Router();
 
-const arrayProd = ManagerHandler.getProducts();
-
-webRouter.get('/', (req, res) => {
 
 
-   res.render('home', { titulo: "handlebars", title: "Hola Mundo!!", productName: arrayProd[1]?.title, arrayProd });
+webRouter.get('/', getRaiz);
 
-});
-
-webRouter.get('/prueba', async (req, res) => {
-
-   const opcionesPaginado = { limit: req.query.limit, page: req.query.page }
-   const criterioBusqueda = { category: req.query.category }
-   const paginado = await productsRepository.paginate(criterioBusqueda, opcionesPaginado)
-   const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }
-   const Docs = paginadoMasCampos.docs
-
-   // const Docs = paginadoMasCampos[docs] 
-   console.log(paginadoMasCampos)
-   console.log(Docs)
-
-   res.render('home', { titulo: "Prueba", title: "Hello World", productName: paginadoMasCampos.docs[1]?.title, Docs });
-
-});
+webRouter.get('/prueba', getPrueba);
 
 
-webRouter.get('/mongoose', async (req, res) => {
-
-   const opcionesPaginado = { limit: req.query.limit, page: req.query.page }
-   const criterioBusqueda = { category: req.query.category }
-   const paginado = await productsRepository.paginate(criterioBusqueda, opcionesPaginado)
-   const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }
-   const Docs = paginadoMasCampos.docs
-
-   
-   console.log(paginadoMasCampos)
-   console.log(Docs)
-
-   res.render('mongoose', {titulo: "Mongoose",title:"Mongoose Products", productId: paginadoMasCampos.docs[1]?._id,
-              Docs, SessionName: req.user?.Nombre, SessionLastName: req.user?.Apellido, SessionEmail: req.user?.username, SessionRol: req.user?.rol});
-
-});
+webRouter.get('/mongoose', getMongoose);
 
 
-webRouter.get('/registro', async (req, res) => {
+webRouter.get('/registro', getRegistro);
 
-   
-   res.render('register', { titulo: "Registro"});
-
-});
-
-webRouter.get('/login', async (req, res) => {
-
-   
-   res.render('login', { titulo: "Login"});
-
-});
-
-
-
-
+webRouter.get('/login', getLogin);
 
 
 

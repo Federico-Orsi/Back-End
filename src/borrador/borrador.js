@@ -104,3 +104,20 @@
 //     res.json(`Su Producto: ${foundProd.title}, fue agregado exitosamente al Carrito: ${req.params.cid}`);
 //   });
 
+
+
+//   routerProducts.get('/:pid', (req, res) =>{
+
+//     const arrayProd = ManagerHandler.getProducts();
+//     const found = arrayProd.find(prod => prod.id == req.params.pid)
+
+//     if (found){
+//        res.send(found) 
+
+//     } else { 
+//     res.send({"Error":'Product Not Found'})
+
+//    }  
+
+
+//  });

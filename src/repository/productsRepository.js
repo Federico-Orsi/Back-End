@@ -1,15 +1,14 @@
-import mongoose from 'mongoose';
-import mongoosePaginate from 'mongoose-paginate-v2';
+import { daoProduct } from '../dao/daoProducts.js';
 
 
 class ProductsRepo {
    
-    constructor(collection, schema){
-        this.collection = mongoose.model(collection, new mongoose.Schema(schema).plugin(mongoosePaginate))
+    constructor(dao){
+        this.dao = dao
     }
 
     async guardar (nuevoProducto) {
-        return await this.dao.create(nuevoProducto)
+        return await this.dao.guardar(nuevoProducto)
        }
        
        
@@ -52,13 +51,4 @@ class ProductsRepo {
 }
 
 
-export const productsRepository = new ProductsRepo("products", ({
-    title: {type: String, required: true}, 
-    description: {type: String, required: true}, 
-    code: {type: Number, required: true}, 
-    price: {type: Number, required: true}, 
-    status: {type: String, required: true}, 
-    stock: {type: Number, required: true}, 
-    category: {type: String, required: true}, 
-    thumbnails: {type: String, required: true}
-}))
+export const productsRepository = new ProductsRepo(daoProduct)
