@@ -4,12 +4,13 @@ import { productPostMongoose } from "../controllers/productControllers/DB/produc
 import { productPutMongoose } from "../controllers/productControllers/DB/productPutMongoose.js";
 import { productDeleteMemoria } from "../controllers/productControllers/enMemoria/productDeleteMemoria.js";
 import { productGetRaizMemoria } from "../controllers/productControllers/enMemoria/productGetRaizMemoria.js";
+import { currentSession } from "../controllers/sessionControllers/currentSession.js";
 
 
 const routerProducts = Router();
 
 
-routerProducts.get('/', productGetRaizMemoria);
+routerProducts.get('/', currentSession,  productGetRaizMemoria);
 
 
 routerProducts.get('/mongoose', productGetMongoose);
@@ -18,6 +19,10 @@ routerProducts.get('/mongoose', productGetMongoose);
 
 routerProducts.post('/mongoose', productPostMongoose);
 
+routerProducts.post('/', currentSession, async (req, res) =>{
+
+  console.log("Probando req.user!!")
+});
 
 
 

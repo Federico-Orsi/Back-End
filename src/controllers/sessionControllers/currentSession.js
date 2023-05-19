@@ -1,4 +1,11 @@
 export const currentSession = async (req, res, next) => {
 
-    res.json(req.user)
+
+    console.log(req.user.rol)
+   if(req.user.rol == "Admin"){
+    next()
+   } else {
+    throw new Error("UnAuthorized")
+   }
+    
 }
