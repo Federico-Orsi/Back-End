@@ -12,6 +12,7 @@ export const getMongoose = async (req, res) => {
         
         console.log(paginadoMasCampos)
         console.log(Docs)
+        console.log(req.user?.rol)
      
         res.render('mongoose', {titulo: "Mongoose",title:"Mongoose Products", productId: paginadoMasCampos.docs[1]?._id,
                    Docs, SessionName: req.user?.Nombre, SessionLastName: req.user?.Apellido, SessionEmail: req.user?.username, SessionRol: req.user?.rol});

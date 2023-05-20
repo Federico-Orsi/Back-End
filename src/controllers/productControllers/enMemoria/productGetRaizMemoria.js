@@ -3,7 +3,7 @@ import { ManagerHandler } from "../../../borrador/clases1raEntrega.js";
 export const productGetRaizMemoria = async (req, res)  =>{
       
   console.log(req.user)
-     console.log(req.user.rol)   
+     console.log(req.user?.rol)   
 
     const cantidad = req.query.limit
   const arrayProd = ManagerHandler.getProducts();

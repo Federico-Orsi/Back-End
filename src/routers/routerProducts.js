@@ -4,13 +4,13 @@ import { productPostMongoose } from "../controllers/productControllers/DB/produc
 import { productPutMongoose } from "../controllers/productControllers/DB/productPutMongoose.js";
 import { productDeleteMemoria } from "../controllers/productControllers/enMemoria/productDeleteMemoria.js";
 import { productGetRaizMemoria } from "../controllers/productControllers/enMemoria/productGetRaizMemoria.js";
-import { currentSession } from "../controllers/sessionControllers/currentSession.js";
+import { test } from "../middlewares/test.js";
 
 
 const routerProducts = Router();
 
 
-routerProducts.get('/', currentSession,  productGetRaizMemoria);
+routerProducts.get('/', productGetRaizMemoria);
 
 
 routerProducts.get('/mongoose', productGetMongoose);
@@ -19,9 +19,13 @@ routerProducts.get('/mongoose', productGetMongoose);
 
 routerProducts.post('/mongoose', productPostMongoose);
 
-routerProducts.post('/', currentSession, async (req, res) =>{
+
+routerProducts.post('/', test, async (req, res) =>{
 
   console.log("Probando req.user!!")
+  console.log(req.user?.rol)
+  res.send(req.user?.rol)
+
 });
 
 
