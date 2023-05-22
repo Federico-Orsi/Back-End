@@ -40,12 +40,12 @@ class ProductsRepo {
        
           async findByIdAndUpdate (id, datosActualizados){
        
-           return await this.dao.findByIdAndUpdate(id, datosActualizados, {new: true}).lean()
+           return await this.dao.findByIdAndUpdate(id, datosActualizados, {new: true})
           }
        
           async findOneAndUpdate (filtro, nuevoCampo){
        
-           return await this.dao.findOneAndUpdate(filtro, nuevoCampo, {new: true}).lean()
+           return await this.dao.findOneAndUpdate(filtro, nuevoCampo, {new: true})
           }
        
 }

@@ -1,9 +1,9 @@
-import { daoCart } from '../dao/daoCarts.js';
+import { daoTicket } from "../dao/daoTickets.js"
 
 
-class CartsRepo {
-    
-        constructor(dao){
+class TicketsRepo {
+   
+    constructor(dao){
         this.dao = dao
     }
 
@@ -51,5 +51,4 @@ class CartsRepo {
 }
 
 
-
-export const cartsRepository = new CartsRepo(daoCart)
+export const ticketsRepository = new TicketsRepo(daoTicket)
