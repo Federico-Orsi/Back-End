@@ -1,46 +1,47 @@
+import { ticketsModel } from "./models/schemas/schemaTicket.js"
 
  class DaoTicket {
     
     
     async guardar (nuevoProducto) {
-        return await productsModel.create(nuevoProducto)
+        return await ticketsModel.create(nuevoProducto)
        }
        
        
        
        async findById (productId){
-        return await productsModel.findById(productId)   
+        return await ticketsModel.findById(productId)   
        }
        
        async findOne(campo){
-           return await productsModel.findOne(campo)
+           return await ticketsModel.findOne(campo)
           }
           
        
        async find (){
-           return await productsModel.find()
+           return await ticketsModel.find()
           }
           
           async paginate (criterioBusqueda, opcionesPaginado){
-           return await productsModel.paginate(criterioBusqueda, opcionesPaginado)
+           return await ticketsModel.paginate(criterioBusqueda, opcionesPaginado)
           }
        
           async replaceOne ({filtro}, {objetoNuevo}){
-           return await productsModel.replaceOne({filtro}, {objetoNuevo})
+           return await ticketsModel.replaceOne({filtro}, {objetoNuevo})
           }
        
           async deleteOne ({item}){
-           return await productsModel.deleteOne({item})
+           return await ticketsModel.deleteOne({item})
           }
        
           async findByIdAndUpdate (id, datosActualizados){
        
-           return await productsModel.findByIdAndUpdate(id, datosActualizados, {new: true}).lean()
+           return await ticketsModel.findByIdAndUpdate(id, datosActualizados, {new: true}).lean()
           }
        
           async findOneAndUpdate (filtro, nuevoCampo){
        
-           return await productsModel.findOneAndUpdate(filtro, nuevoCampo, {new: true}).lean()
+           return await ticketsModel.findOneAndUpdate(filtro, nuevoCampo, {new: true}).lean()
           }
 
 }
