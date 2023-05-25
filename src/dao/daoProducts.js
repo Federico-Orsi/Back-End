@@ -44,6 +44,10 @@ import { productsModel } from "./models/schemas/schemaProducto.js";
            return await productsModel.findOneAndUpdate(filtro, nuevoCampo, {new: true}).lean()
           }
 
+          async insertMany (products){
+            return await productsModel.insertMany(products)
+           }
+
 }
 
 export const daoProduct = new DaoProducto();

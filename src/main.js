@@ -8,6 +8,7 @@ import { ManagerHandler } from './borrador/clases1raEntrega.js';
 import { pasarMessages } from './dao/managers/managerMessages.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
 import routerCarts from './routers/routerCarts.js';
+import routerMocks from './routers/routerMocks.js';
 import routerProducts from './routers/routerProducts.js';
 import routerSessions from './routers/routerSessions.js';
 import routerUsers from './routers/routerUsers.js';
@@ -53,6 +54,8 @@ app.use('/api/carts', routerCarts);
 app.use('/api/users', routerUsers);
 app.use('/api/sessions', routerSessions);
 app.use('/handlebars', webRouter);
+app.use('/', routerMocks);
+
 
 
 app.engine('handlebars', engine());

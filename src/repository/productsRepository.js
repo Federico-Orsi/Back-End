@@ -47,6 +47,11 @@ class ProductsRepo {
        
            return await this.dao.findOneAndUpdate(filtro, nuevoCampo, {new: true})
           }
+
+          async insertMany (products){
+            return await this.dao.insertMany(products)
+           }
+        
        
 }
 

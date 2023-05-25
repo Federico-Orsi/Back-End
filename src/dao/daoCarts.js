@@ -9,12 +9,12 @@ import { cartsModel } from "./models/schemas/schemaCart.js"
        
        
        
-       async findById (productId){
-        return await cartsModel.findById(productId)   
+       async findById ({productId}){
+        return await cartsModel.findById({productId})  
        }
        
        async findOne(campo){
-           return await cartsModel.findOne(campo)
+           return await cartsModel.findOne(campo).populate('products.product')
           }
           
        
@@ -38,7 +38,7 @@ import { cartsModel } from "./models/schemas/schemaCart.js"
        
           async findOneAndUpdate (filtro, nuevoCampo){
        
-           return await cartsModel.findOneAndUpdate(filtro, nuevoCampo, {new: true}).lean()
+           return await cartsModel.findOneAndUpdate(filtro, nuevoCampo, {new: true}).populate('products.product').lean()
           }
 
 }
