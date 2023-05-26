@@ -1,6 +1,5 @@
 
 
-
 export class Producto{
 
 
@@ -38,6 +37,7 @@ export class Producto{
        if (code == undefined) {
     
         throw new Error('Falta el Code');
+       
        } 
     
        if (thumbnails == undefined) {

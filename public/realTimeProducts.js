@@ -56,8 +56,8 @@
 
   //  }
 
-   messageSend.onclick = () =>{
-    
+   messageSend.onclick = (req) =>{
+   
     // pUsuario.innerHTML = userEmail.value ;
     pUsuario.innerHTML +=`<p> Usuario: ${userEmail.value}</p>`
     pMessage.innerHTML = message.value ;

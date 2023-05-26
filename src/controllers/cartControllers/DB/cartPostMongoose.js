@@ -12,7 +12,7 @@ export const cartPostMongoose = async (req, res) =>{
        
         try{ 
        
-       const nuevoCartGuardado = await cartsRepository.guardar(nuevoCart)
+       const nuevoCartGuardado = await cartsRepository.guardar(prodConQty)
         
 
         res.status(202).json(`Su Producto ${prodConQty?.title}, fue agregado exitosamente al Carrito cuyo CID es: ${nuevoCartGuardado._id}.`);

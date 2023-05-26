@@ -4,7 +4,7 @@ import { productPostMongoose } from "../controllers/productControllers/DB/produc
 import { productPutMongoose } from "../controllers/productControllers/DB/productPutMongoose.js";
 import { productDeleteMemoria } from "../controllers/productControllers/enMemoria/productDeleteMemoria.js";
 import { productGetRaizMemoria } from "../controllers/productControllers/enMemoria/productGetRaizMemoria.js";
-import { test } from "../middlewares/test.js";
+import { soloAdmin } from "../middlewares/auth.js";
 
 
 const routerProducts = Router();
@@ -17,24 +17,15 @@ routerProducts.get('/mongoose', productGetMongoose);
 
 
 
-routerProducts.post('/mongoose', productPostMongoose);
-
-
-routerProducts.post('/', test, async (req, res) =>{
-
-  console.log("Probando req.user!!")
-  console.log(req.user?.rol)
-  res.send(req.user?.rol)
-
-});
+routerProducts.post('/mongoose', soloAdmin, productPostMongoose);
 
 
 
-routerProducts.put('/mongoose', productPutMongoose);
+routerProducts.put('/mongoose', soloAdmin, productPutMongoose);
 
 
 
-routerProducts.delete('/:pid', productDeleteMemoria);
+routerProducts.delete('/:pid', soloAdmin, productDeleteMemoria);
 
 
 
