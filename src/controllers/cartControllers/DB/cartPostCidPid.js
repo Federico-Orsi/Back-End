@@ -3,13 +3,14 @@ import { productsRepository } from "../../../repository/productsRepository.js";
 
 export const cartPostCidPid = async (req, res) =>{
         
-   const criterio = {_id: req.params.cid} || {}
-
+   
     const prodById = await productsRepository.findById(req.params.pid)  
     // const cartById = await cartsRepository.findOneAndUpdate(criterio, { $push: { products: prodById}})
-    const cartById = await cartsRepository.findOne(criterio)
+    const cartById = await cartsRepository.findById(req.params.cid)
 
-    await cartById.products.push({product: prodById})
+    // const prodConQty = {...prodById, qty: req.body.qty}
+
+    await cartById.products.push({product: prodById, qty: req.body.qty })
     const cartActualizado = await cartById?.save();
 
    
@@ -17,7 +18,7 @@ export const cartPostCidPid = async (req, res) =>{
     // const cartActualizado = await cartsRepository.replaceOne({_id: req.params.cid }, pushProduct)
     
     
-    console.log(cartById)
+    console.log(cartActualizado)
     
     res.json(cartActualizado)
     

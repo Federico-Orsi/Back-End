@@ -5,7 +5,6 @@ import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import { PORT, SessionSecretWord, uri } from '../config.js';
 import { ManagerHandler } from './borrador/clases1raEntrega.js';
-import { pasarMessages } from './dao/managers/managerMessages.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
 import routerCarts from './routers/routerCarts.js';
 import routerMocks from './routers/routerMocks.js';
@@ -86,7 +85,7 @@ io.on('connection', socket => {
 
 
 
-await pasarMessages()
+// await pasarMessages()
 
 
 

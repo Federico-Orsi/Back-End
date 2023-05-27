@@ -1,9 +1,15 @@
-
+import { cartsRepository } from "../../repository/cartsRepository.js"
 
 
 export async function sessionRaiz (req, res) {
 
-   
+    const nuevoCart = {
+
+        user: req.user.username
+      }
+
+    const cart = await cartsRepository.guardar(nuevoCart)
+    
     // const { e_mail, password} = req.body
     // const user = await userCollection.findOne({ e_mail, password})
     // if (!user) {

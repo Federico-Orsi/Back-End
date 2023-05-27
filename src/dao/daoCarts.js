@@ -9,8 +9,8 @@ import { cartsModel } from "./models/schemas/schemaCart.js"
        
        
        
-       async findById ({productId}){
-        return await cartsModel.findById({productId})  
+       async findById (productId){
+        return await cartsModel.findById(productId)  
        }
        
        async findOne(campo){

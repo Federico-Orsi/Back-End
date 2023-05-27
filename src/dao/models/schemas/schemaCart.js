@@ -3,24 +3,25 @@ import { Schema, model } from "mongoose";
  const cartSchema = new Schema({
     
     user: {type:String, required: false},
-    products: {
-        type: [
+    products: 
+              [
             {
                 product:{
                     // type: Schema.Types.ObjectId ,
-                    type: Object,
-                    ref: "products"
-                }
+                    // ref: "products",
+                    // foreignField: '_id',
+                    // required: true
+                    type: Object
+                },
+                qty: {type:Number}
             }
-        ],
-        default:[],
-    },
+        ]      
 })
 
-cartSchema.pre(/^find/, function (next) {
-    this.populate('products.product')
-    next()
-})
+// cartSchema.pre(/^find/, function (next) {
+//     this.populate('products.product')
+//     next()
+// })
 
 
 export const cartsModel = model("carts", cartSchema)

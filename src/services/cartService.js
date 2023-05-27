@@ -8,7 +8,7 @@ import { productsRepository } from "../repository/productsRepository.js"
      async testCart(cid, pid, qty){
        
         const cartById = await cartsRepository.findById(cid) 
-        const arrayCarrito = cartById.cart
+        const arrayCarrito = cartById.products
         const reqBody = pid
         const found = arrayCarrito.find(elem => elem._id == reqBody )
         const foundIndex = arrayCarrito.indexOf(found)

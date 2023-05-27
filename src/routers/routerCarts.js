@@ -1,6 +1,6 @@
 import { Router } from "express";
+import { cartCidPurchase } from "../controllers/cartControllers/DB/cartCidPurchase.js";
 import { cartDeleteCidPid } from "../controllers/cartControllers/DB/cartDeleteCidPid.js";
-import { cartGetCid } from "../controllers/cartControllers/DB/cartGetCid.js";
 import { cartPostCidPid } from "../controllers/cartControllers/DB/cartPostCidPid.js";
 import { cartPostMongoose } from "../controllers/cartControllers/DB/cartPostMongoose.js";
 import { cartPutCidDb } from "../controllers/cartControllers/DB/cartPutCid.js";
@@ -15,11 +15,11 @@ import { soloUser } from "../middlewares/auth.js";
       // -- en Memoria--------------------------------------
       routerCarts.get('/', cartGetRaizMemoria );
       routerCarts.post('/', soloUser, cartPostRaizMemoria);
-     
-
+      
+      
        // -- en DB-------------------------------------------
 
-      routerCarts.get('/:cid/purchase', cartGetCid );
+      routerCarts.get('/:cid/purchase', cartCidPurchase );
    
 
       routerCarts.put('/:cid', soloUser, cartPutCidDb );

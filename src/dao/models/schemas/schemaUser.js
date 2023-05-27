@@ -7,7 +7,6 @@ export const userSchema = new mongoose.Schema({
     username: {type: String, required: true},
     Edad: {type: Number},
     password: {type: String, required: true},
-    cart: {type: Object, required: true},
     rol: {type: String, required: true}
     
 }).plugin(mongoosePaginate)
