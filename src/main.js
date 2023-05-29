@@ -7,11 +7,13 @@ import { PORT, SessionSecretWord, uri } from '../config.js';
 import { ManagerHandler } from './borrador/clases1raEntrega.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
 import routerCarts from './routers/routerCarts.js';
+import routerLogger from './routers/routerLogger.js';
 import routerMocks from './routers/routerMocks.js';
 import routerProducts from './routers/routerProducts.js';
 import routerSessions from './routers/routerSessions.js';
 import routerUsers from './routers/routerUsers.js';
 import webRouter from './routers/webRouter.js';
+import { logger } from './utils/logger.js';
 
 
  
@@ -27,6 +29,7 @@ const conexionPuerto = app.listen(PORT, () => {
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static('public'));
+app.use(logger);
 
 app.use(session({
     
@@ -53,8 +56,8 @@ app.use('/api/carts', routerCarts);
 app.use('/api/users', routerUsers);
 app.use('/api/sessions', routerSessions);
 app.use('/handlebars', webRouter);
-app.use('/', routerMocks);
-
+app.use('/', routerMocks); 
+app.use('/', routerLogger);
 
 
 app.engine('handlebars', engine());
