@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { Server } from 'socket.io';
 import { PORT, SessionSecretWord, uri } from '../config.js';
 import { ManagerHandler } from './borrador/clases1raEntrega.js';
+import { error } from './middlewares/error.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
 import routerCarts from './routers/routerCarts.js';
 import routerLogger from './routers/routerLogger.js';
@@ -49,6 +50,8 @@ function postSocket (req, res, next) {
 }
 
 app.use(postSocket)
+app.use(error)
+
 
 
 app.use('/api/products', routerProducts);
@@ -63,6 +66,10 @@ app.use('/', routerLogger);
 app.engine('handlebars', engine());
 app.set('views', './views');
 app.set('view engine', 'handlebars');
+
+
+
+
 
 
 const mjeVar = "helloooooo";
