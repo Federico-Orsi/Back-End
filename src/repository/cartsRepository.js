@@ -17,8 +17,8 @@ class CartsRepo {
         return await this.dao.findById(productId)  
        }
        
-       async findOne({campo}){
-           return await this.dao.findOne({campo})
+       async findOne(campo){
+           return await this.dao.findOne(campo)
           }
           
        

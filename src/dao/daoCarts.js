@@ -14,7 +14,7 @@ import { cartsModel } from "./models/schemas/schemaCart.js"
        }
        
        async findOne(campo){
-           return await cartsModel.findOne(campo).populate('products.product')
+           return await cartsModel.findOne(campo)
           }
           
        

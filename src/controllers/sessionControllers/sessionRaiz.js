@@ -3,14 +3,31 @@ import { cartsRepository } from "../../repository/cartsRepository.js"
 
 export async function sessionRaiz (req, res) {
 
+  const usuario = req.user.username
+  const user = await cartsRepository.findOne({user:usuario})
+  
+  
+  if(!user){
+    
     const nuevoCart = {
 
         user: req.user.username
       }
 
     const cart = await cartsRepository.guardar(nuevoCart)
+  }
+
+   
     
-    // const { e_mail, password} = req.body
+    res.json({ status: "success", payload: req['user'], message: "¡1st loguin babyy!! :)" })
+    
+    }
+  
+
+
+  //--- Ejemplo de req.session sin Passport -----------------------------------------
+   
+  // const { e_mail, password} = req.body
     // const user = await userCollection.findOne({ e_mail, password})
     // if (!user) {
         
@@ -24,7 +41,5 @@ export async function sessionRaiz (req, res) {
     //     rol: user.rol
     // }
     // console.log(req.session['user'])
-    res.json({ status: "success", payload: req['user'], message: "¡1st loguin babyy!! :)" })
-    
-    }
-  
+
+     //--------------------------------------------------------------------------------

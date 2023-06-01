@@ -1,5 +1,6 @@
 import passport from 'passport'
 import { Strategy } from 'passport-local'
+import { UnauthorizedError } from '../errors/errors.js'
 import { usersRepository } from '../repository/usersRepository.js'
 import { validarQueSeanIguales } from '../utils/crypto.js'
 
@@ -8,9 +9,9 @@ passport.use('local', new Strategy(async (username, password, done) => {
     try{
     const buscado = await usersRepository.findOne({username})
     if (!buscado)
-        return done(new Error('Error de autenticación'))
+        return done(new UnauthorizedError())
     if (!validarQueSeanIguales(password, buscado.password))
-        return done(new Error('Error de autenticacion'))
+        return done(new UnauthorizedError())
     delete buscado.password
     done(null, buscado)
     } catch (error){

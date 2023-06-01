@@ -1,35 +1,33 @@
 import crypto from "crypto";
 import { cartsRepository } from "../repository/cartsRepository.js";
 import { ticketsRepository } from "../repository/ticketsRepository.js";
+import { actualizarStocks } from "./actualizarStocks.js";
+import { sinStockCart } from "./sinStockCart.js";
 import { totalAmountCart } from "./totalAmountCart.js";
+ 
+ class TicketService {
 
-class TicketService {
-
-    async create(cid) {
+     async create(cid) {
       
         const cartById = await cartsRepository.findById(cid) 
+        const arr = cartById.products
+        const stock_OK = arr.filter(item => item.qty < item.product?.stock )  
         
-        // const cart = await cartsRepository.findOne({ _id: cid })
-        // const wantedProducts = productIds.map(pid => {
-        //   const wanted = business.products.find(bp => bp.id === pid)
-        //   if (!wanted) {
-        //     throw new Error('productos invalidos para el negocio seleccionado')
-        //   }
-        //   return wanted
-        // })
         const amountCart = await totalAmountCart(cid)
-        
-        // const totalPrice = wantedProducts.reduce((accum, prod) => prod.price + accum, 0)
+         
         const newTicketData = {
           code: crypto.randomUUID(),
           purchase_dateTime: new Date(),
           purchaser: cartById.user,
           cart: cartById._id,
-          productos: cartById.products,
-          order_total: amountCart
+          productos: stock_OK,
+          order_total: "$"+" "+ amountCart
           
         }
         const ticket = await ticketsRepository.guardar(newTicketData)
+
+        await actualizarStocks(cid)
+        await sinStockCart(cid)
         
         return ticket
         
