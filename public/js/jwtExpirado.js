@@ -21,6 +21,8 @@ formJwtExpirado.onsubmit = (e, req, res, next) =>{
             'Content-Type': 'application/json'
         }
     })
+
+    alert("Gracias, te hemos enviado el correo nuevamente.")
 }
 
 

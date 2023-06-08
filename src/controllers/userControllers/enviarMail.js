@@ -1,7 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { createTransport } from "nodemailer"
 import { SECRET_TOKEN } from "../../../config.js"
-import { tokensRepository } from '../../repository/tokensRepository.js'
 import { usersRepository } from "../../repository/usersRepository.js"
 
 const NodeMailer = createTransport({
@@ -20,14 +19,8 @@ export async function enviarMail(req, res, next) {
     const user = await usersRepository.findById(req.body.id)
     const userId = user._id
 
-    const token = jwt.sign({ userId }, SECRET_TOKEN, { expiresIn: "3m" })
+    const token = jwt.sign({ userId }, SECRET_TOKEN, { expiresIn: "1h" })
     
-    const newToken = {
-        userId: userId,
-        token: token
-    }
-    
-    await tokensRepository.guardar(newToken)
 
     const { destinatario, mensaje } = req.body
 

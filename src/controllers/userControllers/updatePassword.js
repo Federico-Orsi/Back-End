@@ -1,14 +1,12 @@
 import { UnauthorizedError } from "../../errors/errors.js"
 import { usersRepository } from "../../repository/usersRepository.js"
-import { validarQueSeanIguales } from "../../utils/crypto.js"
+import { hashear, validarQueSeanIguales } from "../../utils/crypto.js"
 
 export async function updatePassword(req, res, next) {
     
    const user = await usersRepository.findById(req.body.uid)
    
    
-   
-
    if(!validarQueSeanIguales(req.body.oldPass, user.password)){
     throw new UnauthorizedError("Ha habido un error con alguna de sus claves")
    } else if(validarQueSeanIguales(req.body.newPass, user.password)){
@@ -17,7 +15,11 @@ export async function updatePassword(req, res, next) {
     
    }
 
-  res.json(user)
+   user.password = hashear(req.body.newPass)
+      
+   user?.save()
+
+   res.json(user)
     
 
 }
