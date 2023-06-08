@@ -2,28 +2,32 @@
 const formPassword = document.getElementById('formPassword')
 const oldPassword = document.getElementById('oldPassword')
 const newPassword = document.getElementById('newPassword')
+const userId = document.getElementById('userId')
 
 
 
-formPassword.onsubmit = (e, req, res, next) =>{
+
+formPassword.onsubmit = async (e) =>{
 
     e.preventDefault()
     
-    console.log(oldPassword.value)
-    console.log(newPassword.value)
+    
+    const password = {
+        uid: userId.value,
+        oldPass: oldPassword.value,
+        newPass: newPassword.value
+    };
+    fetch('/api/users/actualizar_password', {
+        method: 'PUT',
+        body: JSON.stringify(password),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    
+    
+
    
 }
 
 
-// export async function reestablecerPassword(req, res, next) {
-
-   
-//     // setTimeout(() => {  
-//     // }, 3000);
-
-//     const payload = jwt.verify(token, SECRET_TOKEN)
-//     console.log(payload["userId"])
-
-//     res.json(token)
-
-// }

@@ -16,8 +16,8 @@ class TokenRepo {
         jwt.sign(userId, secret, ttl)
        }  
 
-       async decodificarToken (nuevoToken) {
-        return await this.dao.guardar(nuevoToken)
+       async decodificarToken (nuevoToken, secret) {
+        const payload = jwt.verify(nuevoToken, secret)
        }  
        
        

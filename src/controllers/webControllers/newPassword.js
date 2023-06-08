@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken'
-import { SECRET_TOKEN } from "../../../config.js"
-
+import { SECRET_TOKEN } from '../../../config.js'
 
 export const newPassword = async (req, res) => {
 
     const token = req.query.token
+    
 
     try {
         const payload = jwt.verify(token, SECRET_TOKEN)
@@ -20,7 +20,7 @@ export const newPassword = async (req, res) => {
         console.log(error)
     }
 
-
-
+    
+ 
 
 }

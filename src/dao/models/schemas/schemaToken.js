@@ -8,4 +8,4 @@ export const tokenSchema = new mongoose.Schema({
 }).plugin(mongoosePaginate)
 
 
-export const tokensModel = mongoose.model("tokens", tpkenSchema)
+export const tokensModel = mongoose.model("tokens", tokenSchema)
