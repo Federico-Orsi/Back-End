@@ -30,8 +30,8 @@ import { productsModel } from "./models/schemas/schemaProducto.js";
            return await productsModel.replaceOne({filtro}, {objetoNuevo})
           }
        
-          async deleteOne ({item}){
-           return await productsModel.deleteOne({item})
+          async deleteOne (item){
+           return await productsModel.deleteOne(item)
           }
        
           async findByIdAndUpdate (id, datosActualizados){

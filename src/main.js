@@ -53,7 +53,6 @@ app.use(postSocket)
 app.use(error)
 
 
-
 app.use('/api/products', routerProducts);
 app.use('/api/carts', routerCarts);
 app.use('/api/users', routerUsers);

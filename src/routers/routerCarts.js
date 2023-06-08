@@ -6,7 +6,8 @@ import { cartPostMongoose } from "../controllers/cartControllers/DB/cartPostMong
 import { cartPutCidDb } from "../controllers/cartControllers/DB/cartPutCid.js";
 import { cartGetRaizMemoria } from "../controllers/cartControllers/enMemoria/cartGetRaizMemoria.js";
 import { cartPostRaizMemoria } from "../controllers/cartControllers/enMemoria/cartPostRaizMemoria.js";
-import { soloUser } from "../middlewares/auth.js";
+import { userAndPremium } from "../middlewares/auth.js";
+import { premiumCart } from "../middlewares/premiumCart.js";
       
       const routerCarts = Router();
 
@@ -14,7 +15,7 @@ import { soloUser } from "../middlewares/auth.js";
 
       // -- en Memoria--------------------------------------
       routerCarts.get('/', cartGetRaizMemoria );
-      routerCarts.post('/', soloUser, cartPostRaizMemoria);
+      routerCarts.post('/', userAndPremium, cartPostRaizMemoria);
       
       
        // -- en DB-------------------------------------------
@@ -22,18 +23,18 @@ import { soloUser } from "../middlewares/auth.js";
       routerCarts.get('/:cid/purchase', cartCidPurchase );
    
 
-      routerCarts.put('/:cid', soloUser, cartPutCidDb );
+      routerCarts.put('/:cid', userAndPremium, cartPutCidDb );
 
     
 
-      routerCarts.post('/mongoose', soloUser, cartPostMongoose );
+      routerCarts.post('/mongoose', userAndPremium, cartPostMongoose );
 
 
-      routerCarts.post('/:cid/products/:pid', soloUser, cartPostCidPid);
+      routerCarts.post('/:cid/products/:pid', userAndPremium, premiumCart, cartPostCidPid);
   
 
       
-      routerCarts.delete('/:cid/products/:pid', soloUser,  cartDeleteCidPid);
+      routerCarts.delete('/:cid/products/:pid', userAndPremium,  cartDeleteCidPid);
   
    
    export default routerCarts

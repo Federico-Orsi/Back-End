@@ -1,15 +1,24 @@
-import { daoProduct } from '../dao/daoProducts.js';
+import jwt from 'jsonwebtoken'
+import { daoToken } from "../dao/daoTokens.js"
 
 
-class ProductsRepo {
+class TokenRepo {
    
     constructor(dao){
         this.dao = dao
     }
 
-    async guardar (nuevoProducto) {
-        return await this.dao.guardar(nuevoProducto)
+    async guardar (nuevoToken) {
+        return await this.dao.guardar(nuevoToken)
        }
+
+       async generarToken (userId, secret, ttl) {
+        jwt.sign(userId, secret, ttl)
+       }  
+
+       async decodificarToken (nuevoToken) {
+        return await this.dao.guardar(nuevoToken)
+       }  
        
        
        
@@ -34,8 +43,8 @@ class ProductsRepo {
            return await this.dao.replaceOne({filtro}, {objetoNuevo})
           }
        
-          async deleteOne (item){
-           return await this.dao.deleteOne(item)
+          async deleteOne ({item}){
+           return await this.dao.deleteOne({item})
           }
        
           async findByIdAndUpdate (id, datosActualizados){
@@ -43,17 +52,8 @@ class ProductsRepo {
            return await this.dao.findByIdAndUpdate(id, datosActualizados, {new: true})
           }
        
-          async findOneAndUpdate (filtro, nuevoCampo){
-       
-           return await this.dao.findOneAndUpdate(filtro, nuevoCampo, {new: true})
-          }
-
-          async insertMany (products){
-            return await this.dao.insertMany(products)
-           }
-        
-       
+          
 }
 
 
-export const productsRepository = new ProductsRepo(daoProduct)
+export const tokensRepository = new TokenRepo(daoToken)

@@ -1,12 +1,24 @@
+import { UnauthorizedError } from "../../errors/errors.js"
+import { usersRepository } from "../../repository/usersRepository.js"
+
+ 
+ 
+ const chequearPremium = async (username) =>{
+
+    const user = await usersRepository.findOne({username})
+    if(user?.rol != "Premium") throw new UnauthorizedError("Solo Usuarios Premium")
+    
+ }
 
 
-export class Producto{
+ export class Producto{
 
 
-    constructor({title, description, code, price, status, stock, category, thumbnails}){
+    constructor({title, description, owner, code, price, status, stock, category, thumbnails}){
         
         this.title=title,
         this.description=description,
+        this.owner=owner,
         this.code=code,
         this.price=price,
         this.status=status,
@@ -16,7 +28,10 @@ export class Producto{
        
         
     
-    
+       if(owner){
+        
+       chequearPremium(owner)
+       }
         
     
        if (title == undefined) {

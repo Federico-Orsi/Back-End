@@ -8,7 +8,9 @@ export const productGetMongoose = async (req, res)  =>{
   const paginado = await productsRepository.paginate(criterioBusqueda, opcionesPaginado)
   const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }
 
-  io.on('connection', socket => {
+
+  
+  req.io.on('connection', socket => {
 
 
     socket.emit('paginado', paginadoMasCampos)

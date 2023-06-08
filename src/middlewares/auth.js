@@ -2,14 +2,16 @@ import { UnauthorizedError } from "../errors/errors.js";
 
 
 
-export const soloAdmin = async (req, res, next) => {
+export const adminAndPremium = async (req, res, next) => {
 
     
 
-    if (req.user?.rol != "Admin") throw new UnauthorizedError();
-      
-       next();
-   
+    if (req.user?.rol == "Admin" || req.user?.rol == "Premium" ){
+        next();
+    } else{
+        throw new UnauthorizedError("Solo Admin y Usuarios Premium");
+    }
+    
    }
 
 
@@ -19,4 +21,16 @@ export const soloAdmin = async (req, res, next) => {
       
        next();
    
+   }
+
+
+   export const userAndPremium = async (req, res, next) => {
+
+    
+    if (req.user?.rol == "User" || req.user?.rol == "Premium" ){
+        next();
+    } else{
+        throw new UnauthorizedError("Solo Users y Usuarios Premium");
+    }
+    
    }
