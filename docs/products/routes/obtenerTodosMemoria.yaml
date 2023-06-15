@@ -1,0 +1,15 @@
+paths:
+  /api/products:
+    get:
+      summary: Devuelve todos los productos disponibles en Memoria.
+      tags:
+        - Products
+      responses:
+        "200":
+          description: Listado de todos los productos en memoria.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'

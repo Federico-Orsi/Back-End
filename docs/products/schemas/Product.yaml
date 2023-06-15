@@ -1,0 +1,59 @@
+# Product
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - _id
+        - title
+        - description
+        - owner
+        - code
+        - price
+        - status
+        - stock
+        - category
+        - thumbnails
+      properties:
+        _id:
+          type: string
+          description: El id del producto.
+        title:
+          type: string
+          description: El nombre del producto.
+        description:
+          type: string
+          description: La descripción del producto.
+        owner:
+          type: string
+          description: El dueño del producto.
+        code:
+          type: number
+          description: El código numérico del producto.
+        price:
+          type: number
+          description: El precio del producto.
+        status:
+          type: string
+          description: El status del producto.
+        stock:
+          type: number
+          description: El stock disponible del producto.  
+        category:
+          type: string
+          description: La categoría del producto.
+        thumbnails:
+          type: string
+          description: La foto del producto.  
+      example:
+        _id: 4ughd7r3-365n-t5u6-sk85-h58sk23j5k2h
+        title: El arte de la guerra.
+        description: Libro de táctica militares
+        owner: juan@gmail.com
+        code: 123
+        price: 2500
+        status: disponible 
+        stock: 98
+        category: Estrategias
+        thumbnails: war_art.jpg

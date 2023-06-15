@@ -1,0 +1,29 @@
+paths:
+  /api/products/mongoose/paginado:
+    post:
+      summary: Devuelve todos los productos disponibles en Mongo DB según la paginación indicada.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/paginadoMongo'  
+      responses:
+        "200":
+          description: Listado de todos los productos en la DB segun la paginación indicada .
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized Error
+        "404":
+          description: Not found Error
+        "500":
+          description: Internal server error          

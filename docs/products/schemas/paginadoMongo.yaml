@@ -1,0 +1,25 @@
+components:
+  requestBodies:
+    paginadoMongo:
+      type: object
+      required:
+        - limit
+        - page
+        - category
+        
+      properties:
+        limit:
+          type: number
+          description: Cantidad de productos que muestra por cada página.
+        page:
+          type: string
+          description: Página actual.
+        category:
+          type: string
+          description: Filtro por categoría de producto.
+        
+      example:
+        limit: juan
+        page: perez
+        category: juan@mail.com
+        

@@ -8,6 +8,7 @@ import { ManagerHandler } from './borrador/clases1raEntrega.js';
 import { error } from './middlewares/error.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
 import routerCarts from './routers/routerCarts.js';
+import routerDocs from './routers/routerDocs.js';
 import routerLogger from './routers/routerLogger.js';
 import routerMocks from './routers/routerMocks.js';
 import routerProducts from './routers/routerProducts.js';
@@ -59,8 +60,8 @@ app.use('/api/users', routerUsers);
 app.use('/api/sessions', routerSessions);
 app.use('/handlebars', webRouter);
 app.use('/', routerMocks); 
-app.use('/', routerLogger);
-
+app.use('/', routerLogger); 
+app.use('/docs', routerDocs );
 
 app.engine('handlebars', engine());
 app.set('views', './views');

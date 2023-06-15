@@ -2,6 +2,7 @@ import { Router } from "express";
 import { productDeleteMongoose } from "../controllers/productControllers/DB/productDeleteMongoose.js";
 import { productGetMongoose } from "../controllers/productControllers/DB/productGetMongoose.js";
 import { productPostMongoose } from "../controllers/productControllers/DB/productPostMongoose.js";
+import { productPostPaginado } from "../controllers/productControllers/DB/productPostPaginado.js";
 import { productPutMongoose } from "../controllers/productControllers/DB/productPutMongoose.js";
 import { productDeleteMemoria } from "../controllers/productControllers/enMemoria/productDeleteMemoria.js";
 import { productGetRaizMemoria } from "../controllers/productControllers/enMemoria/productGetRaizMemoria.js";
@@ -16,6 +17,8 @@ routerProducts.get('/', productGetRaizMemoria);
 
 routerProducts.get('/mongoose', productGetMongoose);
 
+
+routerProducts.post('/mongoose/paginado',adminAndPremium, productPostPaginado);
 
 
 routerProducts.post('/mongoose', adminAndPremium, productPostMongoose);

@@ -11,13 +11,13 @@ export const productPostMongoose = async (req, res) => {
               const owner = nuevoProducto.owner
               const user = await usersRepository.findOne({username:owner})
 
-              if (user?.rol == "Premium") {
+              if (user?.rol == "Premium" || req.user?.rol == "Admin" ) {
 
                      const nuevoProdMongo = await productsRepository.guardar(nuevoProducto)
                      const prodMongoID = await productsRepository.findById(nuevoProdMongo._id)
                      res.status(202).json(prodMongoID)
               } else{
-                     res.status(401).send("El campo Owner solo admite Usuarios Premium")
+                     res.status(401).send("Para poder crear un Producto, se necesita que un Admin esté loggeado o pasar por body un Owner de Usuario Premium.")
               }
 
 
