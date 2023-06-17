@@ -2,28 +2,52 @@
 
 components:
   requestBodies:
-    DatosCrearUsuario:
+    NewProduct:
       type: object
       required:
-        - nombre
-        - apellido
-        - email
-        - password
+        - title
+        - description
+        - code
+        - price
+        - status
+        - stock
+        - category
+        - thumbnails
       properties:
-        nombre:
+        title:
           type: string
-          description: El nombre del usuario.
-        apellido:
+          description: El nombre del producto.
+        description:
           type: string
-          description: El apellido del usuario.
-        email:
+          description: La descripción del producto.
+        owner:
           type: string
-          description: El email del usuario.
-        password:
+          description: El dueño del producto.
+        code:
+          type: number
+          description: El código numérico del producto.
+        price:
+          type: number
+          description: El precio del producto.
+        status:
           type: string
-          description: La contraseña del usuario.
+          description: El status del producto.
+        stock:
+          type: number
+          description: El stock disponible del producto.  
+        category:
+          type: string
+          description: La categoría del producto.
+        thumbnails:
+          type: string
+          description: La foto del producto.  
       example:
-        nombre: juan
-        apellido: perez
-        email: juan@mail.com
-        password: abc123
+        title: El arte de la guerra.
+        description: Libro de táctica militares
+        owner: juan@gmail.com
+        code: 123
+        price: 2500
+        status: disponible 
+        stock: 98
+        category: Estrategias
+        thumbnails: war_art.jpg

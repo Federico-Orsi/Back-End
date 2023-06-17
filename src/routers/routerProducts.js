@@ -12,9 +12,14 @@ import { adminAndPremium } from "../middlewares/auth.js";
 const routerProducts = Router();
 
 
+  // -- en Memoria--------------------------------------
+
 routerProducts.get('/', productGetRaizMemoria);
 
+routerProducts.delete('/:pid', adminAndPremium, productDeleteMemoria);
 
+  
+// -- en DB-------------------------------------------
 routerProducts.get('/mongoose', productGetMongoose);
 
 
@@ -27,9 +32,6 @@ routerProducts.post('/mongoose', adminAndPremium, productPostMongoose);
 
 routerProducts.put('/mongoose', adminAndPremium, productPutMongoose);
 
-
-
-routerProducts.delete('/:pid', adminAndPremium, productDeleteMemoria);
 
 
 routerProducts.delete('/mongoose/:pid', adminAndPremium, productDeleteMongoose);

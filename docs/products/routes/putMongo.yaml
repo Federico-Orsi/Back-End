@@ -1,0 +1,29 @@
+paths:
+  /api/products/mongoose:
+    put:
+      summary: Actualiza algunas propiedades del Producto indicado en el body.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PutProduct'  
+      responses:
+        "200":
+          description: Actualiza algunos campos del producto.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Product'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized Error
+        "404":
+          description: Not found Error
+        "500":
+          description: Internal server error             

@@ -1,0 +1,29 @@
+paths:
+  /api/products/mongoose:
+    post:
+      summary: Crea un Producto.
+      tags:
+        - Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/NewProduct'  
+      responses:
+        "200":
+          description: Nuevo producto creado.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Product'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized Error
+        "404":
+          description: Not found Error
+        "500":
+          description: Internal server error             

@@ -19,7 +19,7 @@ components:
           description: Filtro por categoría de producto.
         
       example:
-        limit: juan
-        page: perez
-        category: juan@mail.com
+        limit: 3
+        page: 5
+        category: Movies
         

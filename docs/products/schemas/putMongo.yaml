@@ -1,0 +1,28 @@
+components:
+  requestBodies:
+    PutProduct:
+      type: object
+      required:
+        - id
+        - description
+        - status
+        - category
+      properties:
+        id:
+          type: string
+          description: El ID del producto.
+        description:
+          type: string
+          description: La descripción del producto.
+        status:
+          type: string
+          description: El status del producto.
+        category:
+          type: string
+          description: La categoría del producto.
+      example:
+        description: Libro de táctica militares
+        id: 6416356ba32466a9de598f6l
+        status: disponible 
+        category: Estrategias
+        

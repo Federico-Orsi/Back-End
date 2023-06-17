@@ -1,3 +1,4 @@
+import { NotFoundError } from "../../../errors/errors.js"
 import { productsRepository } from "../../../repository/productsRepository.js"
 
 
@@ -5,6 +6,8 @@ export const productDeleteMongoose = async (req, res) => {
 
  try {
     const prod = await productsRepository.findById(req.params.pid)
+
+    if(!prod) throw new NotFoundError
     
     if((prod?.owner == req.user.username) || (req.user?.rol == "Admin") ){
         

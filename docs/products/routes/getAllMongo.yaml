@@ -1,18 +1,12 @@
 paths:
-  /api/products:
+  /api/products/mongoose:
     get:
-      summary: Devuelve todos los productos disponibles en Memoria (salvo que se le indique un "limit" por query).
+      summary: Devuelve todos los productos disponibles en la DB.
       tags:
-        - Products
-      parameters:
-      - name: limit
-        in: query
-        description: estable el límite de productos a mostrar.
-        required: false
-        type: string  
+        - Products  
       responses:
         "200":
-          description: Listado de todos los productos en memoria (salvo que se le indique un "limit" por query).
+          description: Listado de todos los productos en la DB de Mongo.
           content:
             application/json:
               schema:
