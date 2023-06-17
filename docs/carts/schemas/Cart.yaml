@@ -1,0 +1,25 @@
+# Cart
+
+components:
+  schemas:
+    Cart:
+      type: object
+      required:
+        - _id
+        - user
+        - products
+      properties:
+        _id:
+          type: string
+          description: El id del Carrito.
+        user:
+          type: string
+          description: El e-mail del usuario dueño del Carrito.
+        products:
+          type: array
+          description: Los productos del Carrito.  
+      example:
+        _id: 4ughd7r3-365n-t5u6-sk85-h58sk23j5k2h
+        user: btracy@gmail.com
+        products: [{},{},...]
+        

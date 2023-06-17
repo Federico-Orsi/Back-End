@@ -47,6 +47,11 @@ class CartsRepo {
        
            return await this.dao.findOneAndUpdate(filtro, nuevoCampo, {new: true})
           }
+
+          async updateOne (filtro, nuevoCampo){
+       
+            return await this.dao.updateOne(filtro, nuevoCampo, {new: true})
+           }
        
 }
 

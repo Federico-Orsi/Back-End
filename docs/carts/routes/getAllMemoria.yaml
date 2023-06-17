@@ -1,0 +1,23 @@
+paths:
+  /api/carts:
+    get:
+      summary: Devuelve todos los Carts disponibles en Memoria.
+      tags:
+        - Carts
+      responses:
+        "200":
+          description: Listado de todos los Carts en memoria.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Cart'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized Error
+        "404":
+          description: Not found Error
+        "500":
+          description: Internal server error                 

@@ -41,6 +41,11 @@ import { cartsModel } from "./models/schemas/schemaCart.js"
            return await cartsModel.findOneAndUpdate(filtro, nuevoCampo, {new: true}).populate('products.product').lean()
           }
 
+          async updateOne (filtro, nuevoCampo){
+       
+            return await cartsModel.updateOne(filtro, nuevoCampo, {new: true})
+           }
+
 }
 
 export const daoCart = new DaoCart();

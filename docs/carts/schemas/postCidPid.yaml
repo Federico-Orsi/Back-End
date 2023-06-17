@@ -1,0 +1,13 @@
+components:
+  requestBodies:
+    PostCidPid:
+      type: object
+      required:
+        - qty
+      properties:
+        qty:
+          type: number
+          description: La cantidad de unidades del producto a ingresar al Cart.
+      example:
+        qty: 10
+        

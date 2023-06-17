@@ -1,0 +1,12 @@
+components:
+  requestBodies:
+    DeleteCidPid:
+      type: object
+      required:
+        - pid
+      properties:
+        pid:
+          type: string
+          description: El ID del producto a eliminar del Cart.
+      example:
+        pid: "6416356ba32466a9de598f6e"

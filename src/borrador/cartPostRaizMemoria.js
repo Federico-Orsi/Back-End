@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { ManagerHandler } from "../../../borrador/clases1raEntrega.js";
+import { ManagerHandler } from "./clases1raEntrega.js";
 
 export const cartPostRaizMemoria = (req, res)  =>{
       

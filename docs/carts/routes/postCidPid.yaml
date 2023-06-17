@@ -1,0 +1,40 @@
+paths:
+  /api/carts/{cid}/products/{pid}:
+    post:
+      summary: Agrega un producto a un Carrito en particular.
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PostCidPid'  
+      parameters:
+      - name: pid
+        in: path
+        description: parametro de ruta con el ID del producto.
+        required: true
+        type: string  
+      - name: cid
+        in: path
+        description: parametro de ruta con el ID del carrito.
+        required: true
+        type: string  
+      responses:
+        "200":
+          description: El Producto indicado en la ruta se agrega a un Carrito en particular.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Cart'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized Error
+        "404":
+          description: Not found Error
+        "500":
+          description: Internal server error    
