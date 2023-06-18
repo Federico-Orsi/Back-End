@@ -1,0 +1,44 @@
+# Ticket
+
+components:
+  schemas:
+    Ticket:
+      type: object
+      required:
+        - _id
+        - code
+        - purchase_dateTime
+        - order_total
+        - purchaser
+        - cart
+        - productos
+      properties:
+        _id:
+          type: string
+          description: El id del Ticket.
+        code:
+          type: string
+          description: Codigo de la operación.
+        purchase_dateTime:
+          type: date
+          description: Fecha y hora de la compra.    
+        order_total:
+          type: string
+          description: Monto total de la compra.  
+        cart:
+          type: object
+          description: El ObjectId del carrito comprado.  
+        purchaser:
+          type: string
+          description: El e-mail del usuario/comprador que realizó la compra.
+        productos:
+          type: array
+          description: Los productos comprados.  
+      example:
+        _id: 4ughd7r3-365n-t5u6-sk85-h58sk23j5k2h
+        code: 17ab37c2-463c-4c0c-a0f1-cd6fef8eabba
+        purchase_dateTime: "2023-06-17T23:13:37.372+00:00"
+        order_total: "$ 50000"
+        cart: 6471f7026beb821ee4b6089e
+        purchaser: btracy@gmail.com
+        productos: [{},{},...]

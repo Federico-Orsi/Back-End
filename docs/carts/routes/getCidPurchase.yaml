@@ -1,0 +1,29 @@
+paths:
+  /api/carts/{cid}/purchase:
+    get:
+      summary: Genera el ticket con el detalle de la compra del Carrito en cuestión.
+      tags:
+        - Carts
+      parameters:
+      - name: cid
+        in: path
+        description: parametro de ruta con el ID del carrito.
+        required: true
+        type: string  
+      responses:
+        "200":
+          description: Muestra el ticket con el detalle de la compra del Carrito en cuestión.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/Ticket'
+        "400":
+          description: Bad request
+        "401":
+          description: Unauthorized Error
+        "404":
+          description: Not found Error
+        "500":
+          description: Internal server error    
