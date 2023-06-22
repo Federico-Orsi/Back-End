@@ -6,7 +6,7 @@ import supertest from 'supertest';
 
 const PORT = 8080
 const serverBaseUrl = `http://localhost:${PORT}`
-const httpClient = supertest(serverBaseUrl)
+const httpClient = supertest.agent(serverBaseUrl)
 
 describe('router de productos', () => {
 
@@ -35,9 +35,6 @@ describe('router de productos', () => {
                 const { statusCode, ok, body } = await httpClient.post('/api/sessions').send(loggin)
                 assert.ok(ok, 'la peticion no fue exitosa')
                 assert.strictEqual(statusCode, 200)
-                // assert.ok(id, 'la rta no incluye id')
-                console.log(body.payload.username)
-                console.log(body.payload.password)
                 assert.deepStrictEqual({
                     "username": body.payload.username,
                     "password": body.payload.password
@@ -61,65 +58,37 @@ describe('router de productos', () => {
                     "status": "ki",
                     "stock": 200,
                     "category": "life",
-
                     "thumbnails": "goku.jpg"
                 }
 
+                const loggin = {
+                    "username": "btracy@gmail.com",
+                    "password": "brain10"
+                }
 
+                // await httpClient.post('/api/sessions').send(loggin)
                 const { statusCode, ok, body } = await httpClient.post('/api/products/mongoose').send(newProduct)
+                
                 assert.ok(ok, 'la peticion no fue exitosa')
                 assert.strictEqual(statusCode, 202)
-                // assert.ok(id, 'la rta no incluye id')
-                assert.deepStrictEqual(body, newProduct)
+                const bodySin_idYSin__v = {
+                    "title": body.title,
+                    "description": body.description,
+                    "code": body.code,
+                    "price": body.price,
+                    "status": body.status,
+                    "stock": body.stock,
+                    "category": body.category,
+                    "owner": body.owner,
+                    "thumbnails": body.thumbnails
+                }
+
+                assert.deepStrictEqual(bodySin_idYSin__v, {...newProduct,
+                    "owner": "Admin"
+                })
             })
         })
-
-
-    // describe('POST', () => {
-    //     describe('Datos correctos para generar un nuevo Producto.', () => {
-    //         it('crea un Producto en la DB', async () => {
-    //             const newProduct = {
-    //                 "title": "DBZ",
-    //                 "description": "4 estrellas",
-    //                 "code": 123,
-    //                 "price": 1500,
-    //                 "status": "ki",
-    //                 "stock": 200,
-    //                 "category": "life",
-
-    //                 "thumbnails": "goku.jpg"
-    //             }
-
-
-    //             const { statusCode, ok, body } = await httpClient.post('/api/products/mongoose').send(newProduct)
-    //             assert.ok(ok, 'la peticion no fue exitosa')
-    //             assert.strictEqual(statusCode, 202)
-    //             // assert.ok(id, 'la rta no incluye id')
-    //             assert.deepStrictEqual(body, newProduct)
-    //         })
-    //     })
-
-        // describe('si se envian todos los datos incluyendo la foto', () => {
-        //   it('crea una mascota en el sistema con la ruta de la foto recibida', async () => {
-        //     const { statusCode, ok, body: { id, foto, ...restoDeLaMascota } } = await httpClient.post('/api/mascotas')
-        //       .field('nombre', mocks.inputMascotaConFoto.nombre)
-        //       .field('especie', mocks.inputMascotaConFoto.especie)
-        //       .field('fechaNacimiento', mocks.inputMascotaConFoto.fechaNacimiento)
-        //       .attach('foto', mocks.inputMascotaConFoto.foto)
-        //     assert.ok(ok, 'la peticion no fue exitosa')
-        //     assert.strictEqual(statusCode, 201, 'no se obtuvo el codigo de estado esperado')
-        //     assert.ok(id, 'la rta no incluye id')
-        //     assert.ok(foto, 'la rta no incluye foto')
-        //     assert.ok(foto.endsWith(mocks.nombreArchivoFoto), 'no coincide la ruta con el nombre de la foto enviada')
-        //     assert.deepStrictEqual(restoDeLaMascota, {
-        //       nombre: mocks.inputMascotaConFoto.nombre,
-        //       especie: mocks.inputMascotaConFoto.especie,
-        //       fechaNacimiento: mocks.inputMascotaConFoto.fechaNacimiento,
-        //       adoptada: false,
-        //       duenio: null,
-        //     })
-        //   })
-        // })
+        
     })
 })
 
