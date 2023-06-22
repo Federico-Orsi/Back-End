@@ -5,7 +5,8 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "start": "node src/main.js",
+    
+    "start": "node .",
     "test": "nodemon src/main.js"
   },
   "repository": {
@@ -38,5 +39,9 @@
     "swagger-ui-express": "^4.6.3",
     "uuid": "^9.0.0",
     "winston": "^3.9.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
   }
 }
