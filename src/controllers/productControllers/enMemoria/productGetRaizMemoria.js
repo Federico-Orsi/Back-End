@@ -1,14 +1,15 @@
+import { ManagerHandler } from "../../../borrador/clases1raEntrega.js";
 
 export const productGetRaizMemoria = async (req, res)  =>{
       
    
-  // const cantidad = req.query.limit
-  // const arrayProd = ManagerHandler.getProducts();
-  // const limitFilter = arrayProd.slice(0, cantidad)
+  const cantidad = req.query.limit
+  const arrayProd = ManagerHandler.getProducts();
+  const limitFilter = arrayProd.slice(0, cantidad)
 
-  // if (cantidad) {
-  //   res.send(limitFilter);
-  // } else { res.send(ManagerHandler.getProducts()) }
+  if (cantidad) {
+    res.send(limitFilter);
+  } else { res.send(ManagerHandler.getProducts()) }
     
     
 
