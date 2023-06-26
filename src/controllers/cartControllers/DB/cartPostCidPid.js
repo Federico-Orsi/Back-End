@@ -16,7 +16,7 @@ export const cartPostCidPid = async (req, res) =>{
     
     console.log(cartActualizado)
     
-    res.json(cartActualizado)
+    res.status(202).json(cartActualizado)
 
 
 

@@ -8,7 +8,7 @@ export const cartCidPurchase = async (req, res) =>{
  
 
  console.log(ticket)
- res.json(ticket)
+ res.status(200).json(ticket)
  
 
  }

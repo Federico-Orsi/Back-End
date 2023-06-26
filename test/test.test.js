@@ -8,7 +8,7 @@ const PORT = 8080
 const serverBaseUrl = `http://localhost:${PORT}`
 const httpClient = supertest.agent(serverBaseUrl)
 
-describe('router de productos', () => {
+describe('Testeo varios routers a la vez', () => {
 
     before(async () => {
         // await mongoose.connection.close();
@@ -27,8 +27,8 @@ describe('router de productos', () => {
 
     const user = {
         Nombre: "Leonel",
-        Apellido: "Scalonniiiiiiii",
-        username: "laScaloneta@gmail.com",
+        Apellido: "Scalonniiiiiiiiii",
+        username: "laScalonetaa@gmail.com",
         Edad: 40,
         password: "123",
         rol: "User"
@@ -157,6 +157,44 @@ describe('router de productos', () => {
            
         })
     })
+
+
+    describe('POST', () => {
+        describe('Agrego un Producto al Carrito.', () => {
+            it('Agrego producto.', async () => {
+
+                
+
+                const { statusCode, ok, body } = await httpClient.post('/api/carts/6499e0ce7ee177f68edf47ee/products/6499c67d42a6f7d1ef0596fa').send({"qty": 3})
+                
+                console.log(body);
+                assert.ok(ok, 'la peticion no fue exitosa')
+               
+
+            })
+        })
+    })
+
+
+    describe('GET', () => {
+        describe('Finalizo la compra de un carrito en particular.', () => {
+            it('Ticket de la compra.', async () => {
+
+                
+
+                const { statusCode, ok, body } = await httpClient.get('/api/carts/6499e0ce7ee177f68edf47ee/purchase')
+                
+                console.log(body);
+                assert.ok(ok, 'la peticion no fue exitosa')
+                assert.strictEqual(statusCode, 200);
+               
+
+            })
+        })
+    })
+
+
+
 
 
     
