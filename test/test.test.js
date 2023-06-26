@@ -11,20 +11,20 @@ const httpClient = supertest.agent(serverBaseUrl)
 describe('Testeo varios routers a la vez', () => {
 
     before(async () => {
-        // await mongoose.connection.close();
+        
         await mongoose.disconnect();
         await mongoose.connect("mongodb://localhost:27017/test")
-        //     await mongoose.connection.collection('usuarios').deleteMany({})
-        //     await mongoose.connection.collection('usuarios').insertOne(mocks.documentoUsuario)
+        
     })
 
     after(async () => {
-        //     await mongoose.connection.collection('usuarios').deleteMany({})
+        
         await mongoose.connection.close();
     })
 
-    let passwordConHash 
+    let passwordConHash
 
+    //Aquí harcodeo los datos para enviar a los Tests!!
     const user = {
         Nombre: "Platon",
         Apellido: "Greece",
@@ -33,7 +33,7 @@ describe('Testeo varios routers a la vez', () => {
         password: "123",
         rol: "User"
     }
-   
+
     const testProduct = {
         "title": "Auto",
         "description": "Coche",
@@ -49,7 +49,7 @@ describe('Testeo varios routers a la vez', () => {
         describe('Primero registro al nuevo Usuario.', () => {
             it('Generar nuevo Usuario.', async () => {
 
-                
+
 
                 const { statusCode, ok, body } = await httpClient.post('/api/users').send(user)
                 passwordConHash = body.password
@@ -119,7 +119,7 @@ describe('Testeo varios routers a la vez', () => {
 
 
 
-
+                //para que este testeo sea Exitoso, previamente se debe loggear un Admin!!
                 const { statusCode, ok, body } = await httpClient.post('/api/products/mongoose').send(newProduct)
 
                 assert.ok(ok, 'la peticion no fue exitosa')
@@ -140,7 +140,7 @@ describe('Testeo varios routers a la vez', () => {
                     ...newProduct,
                     "owner": "Admin"
                 });
-                
+
             })
         })
 
@@ -148,12 +148,12 @@ describe('Testeo varios routers a la vez', () => {
 
     describe('test Error', () => {
         it('el middleware deberia lanzar un error 401', async () => {
-
-            const { statusCode} = await httpClient.post('/api/products/mongoose').send(testProduct)
+            //en este testeo se debe loggear previamente un Usuario con rol User para que lance un error 401 generado en el middleware de AdminAndPremium!!
+            const { statusCode } = await httpClient.post('/api/products/mongoose').send(testProduct)
             assert.strictEqual(statusCode, 401);
-            
-           
-           
+
+
+
         })
     })
 
@@ -162,13 +162,13 @@ describe('Testeo varios routers a la vez', () => {
         describe('Agrego un Producto al Carrito.', () => {
             it('Agrego producto.', async () => {
 
-                
 
-                const { statusCode, ok, body } = await httpClient.post('/api/carts/6499e0ce7ee177f68edf47ee/products/6499c67d42a6f7d1ef0596fa').send({"qty": 3})
-                
+
+                const { statusCode, ok, body } = await httpClient.post('/api/carts/6499e0ce7ee177f68edf47ee/products/6499c67d42a6f7d1ef0596fa').send({ "qty": 3 })
+
                 console.log(body);
                 assert.ok(ok, 'la peticion no fue exitosa')
-               
+
 
             })
         })
@@ -179,14 +179,14 @@ describe('Testeo varios routers a la vez', () => {
         describe('Finalizo la compra de un carrito en particular.', () => {
             it('Ticket de la compra con resultado OK.', async () => {
 
-                
+
 
                 const { statusCode, ok, body } = await httpClient.get('/api/carts/6499e0ce7ee177f68edf47ee/purchase')
-                
+
                 console.log(body);
                 assert.ok(ok, 'la peticion no fue exitosa')
                 assert.strictEqual(statusCode, 200);
-               
+
 
             })
         })
@@ -196,12 +196,12 @@ describe('Testeo varios routers a la vez', () => {
         describe('Genero un error al finalizar la compra de un carrito en particular.', () => {
             it('Ticket de la compra con error 404 (Not Found).', async () => {
 
-                
 
-                const { statusCode, ok} = await httpClient.get('/api/carts/6499e0ce7ee177f68edf47e/purchase')
-                
+                //en este testeo se debe pasar un :cid inválido para que lance un error 404!!
+                const { statusCode, ok } = await httpClient.get('/api/carts/6499e0ce7e/purchase')
+
                 assert.strictEqual(statusCode, 404);
-               
+
 
             })
         })
@@ -211,7 +211,7 @@ describe('Testeo varios routers a la vez', () => {
 
 
 
-    
+
 })
 
 
