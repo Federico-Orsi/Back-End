@@ -26,10 +26,10 @@ describe('Testeo varios routers a la vez', () => {
     let passwordConHash 
 
     const user = {
-        Nombre: "Leonel",
-        Apellido: "Scalonniiiiiiiiii",
-        username: "laScalonetaa@gmail.com",
-        Edad: 40,
+        Nombre: "Platon",
+        Apellido: "Greece",
+        username: "elBanquete@gmail.com",
+        Edad: 1000,
         password: "123",
         rol: "User"
     }
@@ -95,7 +95,6 @@ describe('Testeo varios routers a la vez', () => {
                     "password": body.payload.password
                 }, {
                     "username": loggin.username,
-                    // "password": '$2b$10$s9QPk/lh6zWfKuRKKWL1wujbi3jea2YFyNFtXpoasu0CQMgumydw2'
                     "password": passwordConHash
                 })
 
@@ -178,7 +177,7 @@ describe('Testeo varios routers a la vez', () => {
 
     describe('GET', () => {
         describe('Finalizo la compra de un carrito en particular.', () => {
-            it('Ticket de la compra.', async () => {
+            it('Ticket de la compra con resultado OK.', async () => {
 
                 
 
@@ -187,6 +186,21 @@ describe('Testeo varios routers a la vez', () => {
                 console.log(body);
                 assert.ok(ok, 'la peticion no fue exitosa')
                 assert.strictEqual(statusCode, 200);
+               
+
+            })
+        })
+    })
+
+    describe('GET', () => {
+        describe('Genero un error al finalizar la compra de un carrito en particular.', () => {
+            it('Ticket de la compra con error 404 (Not Found).', async () => {
+
+                
+
+                const { statusCode, ok} = await httpClient.get('/api/carts/6499e0ce7ee177f68edf47e/purchase')
+                
+                assert.strictEqual(statusCode, 404);
                
 
             })
