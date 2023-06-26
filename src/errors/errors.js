@@ -16,7 +16,7 @@ export class InvalidArgumentError extends Error {
 
 export class UnauthorizedError extends Error {
     constructor() {
-        super('Acceso no autorizado')
+        super('Acceso no autorizado.')
         this.name = 'UnauthorizedError'
         this.statusCode = 401
     }

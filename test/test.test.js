@@ -26,14 +26,24 @@ describe('router de productos', () => {
     let passwordConHash 
 
     const user = {
-        Nombre: "Martinnnn",
-        Apellido: "Tatantan",
-        username: "p9@gmail.com",
-        Edad: 48,
-        password: "p9",
-        rol: "Admin"
+        Nombre: "Leonel",
+        Apellido: "Scalonniiiiiiii",
+        username: "laScaloneta@gmail.com",
+        Edad: 40,
+        password: "123",
+        rol: "User"
     }
    
+    const testProduct = {
+        "title": "Auto",
+        "description": "Coche",
+        "code": 123,
+        "price": 2000,
+        "status": "c3",
+        "stock": 200,
+        "category": "Car",
+        "thumbnails": "c3.jpg"
+    }
 
     describe('POST', () => {
         describe('Primero registro al nuevo Usuario.', () => {
@@ -130,10 +140,26 @@ describe('router de productos', () => {
                 assert.deepStrictEqual(bodySin_idYSin__v, {
                     ...newProduct,
                     "owner": "Admin"
-                })
+                });
+                
             })
         })
 
     })
+
+    describe('test Error', () => {
+        it('el middleware deberia lanzar un error 401', async () => {
+
+            const { statusCode} = await httpClient.post('/api/products/mongoose').send(testProduct)
+            assert.strictEqual(statusCode, 401);
+            
+           
+           
+        })
+    })
+
+
+    
 })
+
 
