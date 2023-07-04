@@ -1,12 +1,16 @@
-import { cartsRepository } from "../../repository/cartsRepository.js"
+import { cartsRepository } from "../../repository/cartsRepository.js";
 
 
 export async function sessionRaiz (req, res) {
 
-  const usuario = req.user.username
-  const user = await cartsRepository.findOne({user:usuario})
+  const userName = req.user.username
+  const user = await cartsRepository.findOne({user:userName})
+  const usuario = req.user
   
-  
+  usuario.last_connection = new Date().getTime();
+
+  usuario.save()
+
   if(!user){
     
     const nuevoCart = {
