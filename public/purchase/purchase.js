@@ -19,7 +19,7 @@ let pid;
 
 const allProductsMongoURL = "http://localhost:8080/api/products/mongoose"
 
-const bringUserURL = "http://back-end-production-3da5.up.railway.app/api/sessions/current"
+const bringUserURL = "http://localhost:8080/api/sessions/current"
 
 const cartIdURL = "http://localhost:8080/api/carts/printCartId"
 

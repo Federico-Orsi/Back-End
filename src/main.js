@@ -43,7 +43,10 @@ app.use(session({
 
 app.use(passportInitialize);
 app.use(passportSession);
-app.use(cors({ origin: 'https://back-end-production-3da5.up.railway.app' }));
+
+const dominiosPermitidos = ["http://back-end-production-3da5.up.railway.app/api/sessions/current", 'https://back-end-production-3da5.up.railway.app' ]
+
+app.use(cors({ origin: dominiosPermitidos }));
 
 export const io = new Server(conexionPuerto);
 
