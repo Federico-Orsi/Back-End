@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express from 'express';
 import { engine } from 'express-handlebars';
 import session from "express-session";
@@ -42,6 +43,7 @@ app.use(session({
 
 app.use(passportInitialize);
 app.use(passportSession);
+app.use(cors({ origin: 'https://back-end-production-3da5.up.railway.app' }));
 
 export const io = new Server(conexionPuerto);
 
