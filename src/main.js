@@ -3,7 +3,7 @@ import { engine } from 'express-handlebars';
 import session from "express-session";
 import mongoose from 'mongoose';
 import { Server } from 'socket.io';
-import { PORT, SessionSecretWord, uri } from '../config.js';
+import { MongoAtlas, PORT, SessionSecretWord } from '../config.js';
 import { ManagerHandler } from './borrador/clases1raEntrega.js';
 import { error } from './middlewares/error.js';
 import { passportInitialize, passportSession } from './middlewares/passport.js';
@@ -21,7 +21,7 @@ import { logger } from './utils/logger.js';
  
 
 
-await mongoose.connect(uri)
+await mongoose.connect(MongoAtlas)
 
 const app = express();
 const conexionPuerto = app.listen(PORT, '0.0.0.0', () => {
