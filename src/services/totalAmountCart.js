@@ -11,5 +11,5 @@ const amountProds_OK = stock_OK.map(p =>p.qty*p.product?.price)
 
 const total = amountProds_OK.reduce((acc, elem) =>{return acc + elem},0)
 console.log(total) 
-return total
-}
+return total  
+} 

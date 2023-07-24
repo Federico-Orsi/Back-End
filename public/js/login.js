@@ -25,7 +25,7 @@ if (loginForm instanceof HTMLFormElement) {
         })
             .then(result => {
                 if (result.status === 200) {
-                    window.location.replace('/handlebars/mongoose')
+                    window.location.replace('http://localhost:8080/purchase/purchase.html')
                 }
             })
     })

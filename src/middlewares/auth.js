@@ -1,6 +1,24 @@
 import { UnauthorizedError } from "../errors/errors.js";
 
 
+export const admin = async (req, res, next) => {
+
+    try {
+
+        if (req.user?.rol == "Admin") {
+            next();
+        } else {
+            throw new UnauthorizedError("Solo los Admin están autorizados para acceder a esta vista");
+        }
+    } catch (error) {
+        
+        console.log(error)
+        next()
+    }
+
+}
+
+
 
 export const adminAndPremium = async (req, res, next) => {
 
@@ -15,12 +33,6 @@ export const adminAndPremium = async (req, res, next) => {
         
         next(error)
     }
-
-    // if (req.user?.rol == "Admin" || req.user?.rol == "Premium" ){
-    //     next();
-    // } else{
-    //     throw new UnauthorizedError("Solo Admin y Usuarios Premium");
-    // }
 
 }
 

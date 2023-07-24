@@ -4,9 +4,14 @@ import { usersRepository } from "../../repository/usersRepository.js"
  
  
  const chequearPremium = async (username) =>{
-
-    const user = await usersRepository.findOne({username})
-    if(user?.rol != "Premium") throw new UnauthorizedError("Solo Usuarios Premium")
+    
+   try {
+       const user = await usersRepository.findOne({ username })
+       if (user?.rol != "Premium") throw new UnauthorizedError("Solo Usuarios Premium")
+    } catch (error) {
+       console.log(error);
+    }
+    
     
  }
 

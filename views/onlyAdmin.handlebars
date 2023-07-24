@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Only Admin</title>
+  </head>
+  <body>
+
+    <h2 id="test">Usuario Loggeado:</h2>
+    <p><strong>{{SessionName}} {{SessionLastName}}</strong></p>
+    <p id="userId" name="UserId" >{{UserId}}</p>
+    <p>e-mail: <strong id="userEmail">{{SessionEmail}}</strong> </p>
+    <p>Rol: <strong>{{SessionRol}}</strong></p>
+
+    
+    <p>Actualizar rol del usuario:</p>
+    <select name="rol" id="rol">
+
+      <option value="Admin">Admin</option>
+      <option value="User">User</option>
+      <option value="Premium">Premium</option>
+
+    </select>
+    <br/>
+    <br/>
+    <br/>
+
+    <button id="updateUser">Actualizar Usuario</button>
+    <br/>
+    <br/>
+<br>
+    <button id="deleteUser">Eliminar Usuario</button>
+
+
+
+<br>
+<br>
+<br>
+<br>
+
+
+
+{{!-- --------------------------------------------------------}}
+<p>--------------------------------------------------------------------------------------------------------------------</p>
+<p>No tomar en cuenta esta parte de aquí debajo para la entrega final!! es solo una prueba y un recordatorio a futuro de como trabaja Handlebars las iteraciones de manera normal sin Mongoose!!</p>
+<ul> 
+    {{#each test}}
+     {{!-- este es el funcionamiento normal de un #each con Handlebars. Itera todos los elementos dentro del array que previamente debimos pasarle en el webController. 
+     Luego las propiedades de cada elemento se colocan con doble llave y funciona OK!!
+     Ojo con la iteracion de Arrays provenientes de Mongo/Mongoose, handlebars no lee bien las propiedades por ser objetos de Mongoose, con lo cual para resolver hay q agregar un this a cada propiedad, o utilizar el metodo .lean() de mongoose, o tmb se podria instalar una versión especifica de Handlebars (aparentemente la @4.5.0), pero a mi no me funcionó del todo!! asique espero no usar handlebars nunca mas in the future!! :|   --}}
+     <li><strong>Usuario:</strong> {{nombre}}</li>
+     
+    {{/each}}
+     
+</ul>
+<p>-----------------------------------------------------------------------------------------------------------------------</p>
+
+
+    <script src="/js/soloAdmin.js" type="module"></script>
+
+  </body>
+</html>

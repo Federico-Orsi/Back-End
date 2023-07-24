@@ -41,6 +41,7 @@
     "winston": "^3.9.0"
   },
   "devDependencies": {
+    "handlebars": "^4.5.0",
     "mocha": "^10.2.0",
     "supertest": "^6.3.3"
   }

@@ -27,7 +27,7 @@ class ProductsRepo {
           }
           
           async paginate (criterioBusqueda, opcionesPaginado){
-           return await this.dao.paginate(criterioBusqueda, opcionesPaginado)
+           return await this.dao.paginate(criterioBusqueda, opcionesPaginado, {lean: true})
           }
        
           async replaceOne ({filtro}, {objetoNuevo}){

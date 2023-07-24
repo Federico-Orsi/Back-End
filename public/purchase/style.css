@@ -1,0 +1,23 @@
+
+.reqUserInfo{
+  display: flex;
+  gap: 8%;
+}
+
+.bg-blackWhite{
+  background-color: black;
+  color: whitesmoke;
+  display: flex;
+  margin-left: 20%;
+  height: fit-content;
+}
+
+#divCart{
+  cursor: pointer;
+}
+
+
+.divArticle{
+  display: flex;
+  justify-content: space-around;
+}

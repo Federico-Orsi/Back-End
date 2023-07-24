@@ -6,6 +6,8 @@ import { getRaiz } from "../controllers/webControllers/getRaiz.js";
 import { getRegistro } from "../controllers/webControllers/getRegistro.js";
 import { jwtExpirado } from "../controllers/webControllers/jwtExpirado.js";
 import { newPassword } from "../controllers/webControllers/newPassword.js";
+import { onlyAdmin } from "../controllers/webControllers/onlyAdmin.js";
+import { admin } from "../middlewares/auth.js";
 
 
 const webRouter = Router();
@@ -27,6 +29,9 @@ webRouter.get('/login', getLogin);
 webRouter.get('/new_password', newPassword);
 
 webRouter.get('/jwt_expirado', jwtExpirado);
+
+webRouter.get('/onlyAdmin', admin, onlyAdmin);
+
 
 
 

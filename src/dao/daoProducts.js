@@ -23,7 +23,7 @@ import { productsModel } from "./models/schemas/schemaProducto.js";
           }
           
           async paginate (criterioBusqueda, opcionesPaginado){
-           return await productsModel.paginate(criterioBusqueda, opcionesPaginado)
+           return await productsModel.paginate(criterioBusqueda, opcionesPaginado, {lean: true})
           }
        
           async replaceOne ({filtro}, {objetoNuevo}){

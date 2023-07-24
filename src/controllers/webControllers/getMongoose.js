@@ -3,7 +3,7 @@ import { productsRepository } from "../../repository/productsRepository.js"
 export const getMongoose = async (req, res) => {
 
 
-        const opcionesPaginado = { limit: req.query.limit, page: req.query.page }
+        const opcionesPaginado = { limit: req.query.limit, page: req.query.page}
         const criterioBusqueda = { category: req.query.category }
         const paginado = await productsRepository.paginate(criterioBusqueda, opcionesPaginado)
         const paginadoMasCampos = { ...paginado, prevLink: "path prev Link", nextLink: "path next Link" }

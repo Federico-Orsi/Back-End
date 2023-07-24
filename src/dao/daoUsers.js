@@ -31,9 +31,18 @@ class DaoUser {
            return await usersModel.replaceOne({filtro}, {objetoNuevo})
           }
        
-          async deleteOne ({item}){
-           return await usersModel.deleteOne({item})
+          async deleteOne (item){
+           return await usersModel.deleteOne(item)
           }
+
+          async deleteMany (){
+            return await usersModel.deleteMany()
+           }
+
+           async insertMany (arr){
+            return await usersModel.insertMany(arr)
+           }
+       
        
           async findByIdAndUpdate (id, datosActualizados){
        

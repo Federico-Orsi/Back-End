@@ -1,10 +1,14 @@
 import { Router } from "express";
 import multer from 'multer';
+import { deleteOneUser } from "../controllers/userControllers/deleteOneUser.js";
 import { documentsMulter } from "../controllers/userControllers/documentsMulter.js";
 import { enviarMail } from "../controllers/userControllers/enviarMail.js";
 import { shiftUser } from "../controllers/userControllers/shiftUser.js";
+import { timerDelete } from "../controllers/userControllers/timerDelete.js";
+import { updateOneUser } from "../controllers/userControllers/updateOneUser.js";
 import { updatePassword } from "../controllers/userControllers/updatePassword.js";
 import { userController } from "../controllers/userControllers/userController.js";
+import { userGetRaiz } from "../controllers/userControllers/userGetRaiz.js";
 
 const routerUsers = Router();
 
@@ -50,6 +54,7 @@ function fieldNameFilter(req, file, cb) {
 const upload = multer({ storage: storage, fileFilter: fieldNameFilter})
 
 
+routerUsers.get('/', userGetRaiz);
 
 routerUsers.post('/', userController);
   
@@ -57,9 +62,18 @@ routerUsers.put('/premium/:uid', shiftUser);
 
 routerUsers.put('/actualizar_password', updatePassword);
 
+routerUsers.put('/actualizarUnUsuario', updateOneUser);
+
+
 routerUsers.post('/enviar-mail', enviarMail); 
 
 routerUsers.post('/:uid/documents', upload.any(), documentsMulter); 
+
+routerUsers.delete('/', timerDelete);
+
+routerUsers.post('/deleteOneUser', deleteOneUser);
+
+
   
   
   export default routerUsers

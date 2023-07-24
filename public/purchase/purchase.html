@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Purchase</title>
+  </head>
+  <body>
+    <section class="reqUserInfo">
+      <div>
+        <h3 id="nombre">Nombre</h3>
+        <h3 id="apellido"></h3>
+        <p id="rol">Rol</p>
+
+      </div>
+    <div class="reqUserInfo" >
+      
+      <p id="usuarioLoggeado"></p> 
+      
+      <div class="bg-blackWhite" id="divCart">
+      <span  style="width: 112px; margin-top: 4%; padding-left: 8%;">Cart User Id: </span><p  style="width: 250px;" id="cartId"></p>
+      </div>
+    </div>
+
+    
+    </section>
+
+    <article class="divArticle">
+    <button id="showProducts">Show Products</button>
+    <button id="ticket">Generar Ticket</button>
+
+
+    </article>
+
+    <div id="containerTicket"></div>
+
+    <section>
+      <div id="products"></div>
+    </section>
+
+    <script src="./purchase.js"></script>
+  </body>
+</html>
