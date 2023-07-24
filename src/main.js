@@ -24,8 +24,8 @@ import { logger } from './utils/logger.js';
 await mongoose.connect(MongoAtlas)
 
 const app = express();
-const conexionPuerto = app.listen(PORT, () => {
-    console.log(`Eschuchando en Puerto ${PORT}`)
+const conexionPuerto = app.listen(PORT, '0.0.0.0' , () => {
+    console.log(`escuchando en ${conexionPuerto.address().port}`)
 })
 
 app.use(express.json());
