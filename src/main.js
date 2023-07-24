@@ -24,7 +24,7 @@ import { logger } from './utils/logger.js';
 await mongoose.connect(uri)
 
 const app = express();
-const conexionPuerto = app.listen(PORT, () => {
+const conexionPuerto = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Eschuchando en Puerto ${PORT}`)
 })
 
